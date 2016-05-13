@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Math_Collection", "Math_Collection\Math_Collection.csproj", "{9F7BCFE6-D502-4A3B-8F08-56A909B1886F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Math_Collection_Interface", "Math_Collection_Interface\Math_Collection_Interface.csproj", "{6D42F648-9639-40BF-A3E4-F3027E728A4A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{9F7BCFE6-D502-4A3B-8F08-56A909B1886F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F7BCFE6-D502-4A3B-8F08-56A909B1886F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F7BCFE6-D502-4A3B-8F08-56A909B1886F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D42F648-9639-40BF-A3E4-F3027E728A4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D42F648-9639-40BF-A3E4-F3027E728A4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D42F648-9639-40BF-A3E4-F3027E728A4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D42F648-9639-40BF-A3E4-F3027E728A4A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
