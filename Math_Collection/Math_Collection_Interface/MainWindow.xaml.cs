@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -40,11 +42,33 @@ namespace Math_Collection_Interface
             }
         }
 
-        private CustomTreeViewItem CreateTreeViewItem(string header)
+        private object CreateTreeViewItem(string header)
         {
-            string[] bla = header.Split('-');
-            if (header.Contains("Degrees To Radians"))
-                return new CustomTreeViewItem(Enums.MathOperations.BasicsDegreesToRadians, header);
+            string[] splitHeader = new string[0];
+            if (header.Contains('-'))
+                splitHeader = header.Split('-');
+            foreach (Enums.MathOperations enumValue in Enum.GetValues(typeof(Enums.MathOperations)))
+            {
+                foreach (MemberInfo enumMemberInfo in (typeof(Enums.MathOperations)).GetMember(enumValue.ToString()))
+                {
+                    object[] enumAttributeInfo = enumMemberInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
+                    for(int i = 0; i < enumAttributeInfo.Length; i++)
+                    {
+                        if(splitHeader.Length > 1)
+                        {
+                            for(int j = 0; j < splitHeader.Length; j++)
+                            {
+                                if (((DescriptionAttribute)enumAttributeInfo[i]).Description.Contains(splitHeader[j]))
+                                    return new CustomTreeViewItem(enumValue, header);
+                            }
+                        }
+                        else
+                        {
+                            return new TreeViewItem().Header = header;
+                        }
+                    }
+                }
+            }
             return null;
         }
 
@@ -53,5 +77,13 @@ namespace Math_Collection_Interface
             return Properties.Resources.Functions.Split('\n');
         }
 
+        private void SelectedOperationChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if(e.NewValue.GetType() == typeof(CustomTreeViewItem))
+            {
+                CustomTreeViewItem treeItem = (CustomTreeViewItem)e.NewValue;
+                operationContentControl.Content = treeItem.UserInterface;
+            }
+        }
     }
 }

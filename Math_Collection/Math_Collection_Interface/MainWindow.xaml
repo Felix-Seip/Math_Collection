@@ -8,19 +8,24 @@
         Title="MainWindow" Height="350" Width="525">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="290*"/>
+            <RowDefinition Height="11*"/>
+            <RowDefinition Height="300*"/>
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="115*"/>
-            <ColumnDefinition Width="382*"/>
+            <ColumnDefinition Width="136*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="357*"/>
             <ColumnDefinition Width="10*"/>
         </Grid.ColumnDefinitions>
-        <Border BorderBrush="Black" BorderThickness="1" Margin="1,2,0,0" Grid.Column="1" Grid.Row="1">
-            <TreeView x:Name="mathOperationsTreeView"/>
+
+
+        <GridSplitter x:Name="gridSplitter"  ResizeBehavior="PreviousAndNext" Grid.Column="2" HorizontalAlignment="Left" Margin="0,2.333,0,9.667" Grid.Row="1" Width="5" Grid.RowSpan="2"/>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="1,2.333,1,9.667" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">
+            <TreeView x:Name="mathOperationsTreeView" SelectedItemChanged="SelectedOperationChanged"/>
         </Border>
+        <ContentControl x:Name="operationContentControl" Content="" Grid.Column="2" Margin="5,0.333,0,0" Grid.Row="1" Grid.ColumnSpan="2"/>
 
     </Grid>
 </Window>
