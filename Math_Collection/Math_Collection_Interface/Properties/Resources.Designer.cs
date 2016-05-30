@@ -61,11 +61,43 @@ namespace Math_Collection_Interface.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Basic Operations
+        ///- Degrees To Radians
+        ///
+        ///Vector Operations
+        ///- Dot Product
+        ///- Magnitude
+        ///- Addition With Vector
+        ///- Subtraction With Vector
+        ///- Multiplication With Vector
+        ///- Multiplication With Scalar
+        ///
+        ///Matrix Operations
+        ///- Transpose Matrix
+        ///- Multiply With Scalar
+        ///- Multiply With Vector
+        ///- Multiply With Matrix
+        ///- Lower Left Pyramid Form
+        ///- Upper Right Pyramid Form
+        ///
+        ///Analysis Operations
+        ///- Derivation of a Function.
         /// </summary>
         internal static string Functions {
             get {
                 return ResourceManager.GetString("Functions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vector 1x2
+        ///Vector 1x3
+        ///Vector 1x4
+        ///Vector 1x5.
+        /// </summary>
+        internal static string Vector_Combo_Box_Values {
+            get {
+                return ResourceManager.GetString("Vector_Combo_Box_Values", resourceCulture);
             }
         }
     }

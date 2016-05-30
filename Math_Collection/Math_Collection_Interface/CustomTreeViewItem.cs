@@ -27,7 +27,7 @@ namespace Math_Collection_Interface
                     return new BasicsDegreesToRadians();
 
                 case Enums.MathOperations.VectorDotProduct:
-                    return null;
+                    return new VectorDotProduct();
                 case Enums.MathOperations.VectorMagnitude:
                     return null;
                 case Enums.MathOperations.VectorAdditionWithVector:

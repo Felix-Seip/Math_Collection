@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,6 +28,7 @@ namespace Math_Collection_Interface
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            WindowState = WindowState.Maximized;
             FillTreeView();
         }
 
@@ -58,7 +60,8 @@ namespace Math_Collection_Interface
                         {
                             for(int j = 0; j < splitHeader.Length; j++)
                             {
-                                if (((DescriptionAttribute)enumAttributeInfo[i]).Description.Contains(splitHeader[j]))
+                                //Regex.Replace replaces all matches: ^\s|\r checks if a whitespace is in the beginning of a string or if the string contains \r
+                                if (((DescriptionAttribute)enumAttributeInfo[i]).Description == Regex.Replace(splitHeader[j], @"^\s|\r", string.Empty, RegexOptions.Multiline))
                                     return new CustomTreeViewItem(enumValue, header);
                             }
                         }
