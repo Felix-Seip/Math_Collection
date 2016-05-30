@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Math_Collection_Interface.Resources">
+    
+    <!--The green color for an border to show the user valid values-->
+    <Color x:Key="BorderColorValid">#2E8B57</Color>
+    
+    <!--The red color for an border to show the user invalid values-->
+    <Color x:Key="BorderColorInvalid">#DC143C</Color>
+
+</ResourceDictionary>
