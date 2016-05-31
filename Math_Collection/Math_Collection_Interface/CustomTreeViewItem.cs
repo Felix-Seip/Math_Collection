@@ -47,6 +47,8 @@ namespace Math_Collection_Interface
                     return null;
                 case Enums.MathOperations.MatrixMultiplicationWithMatrix:
                     return null;
+                case Enums.MathOperations.MatrixPotentiation:
+                    return null;
                 case Enums.MathOperations.MatrixLowerLeftPyramidForm:
                     return null;
                 case Enums.MathOperations.MatrixUpperRightPyramidForm:
