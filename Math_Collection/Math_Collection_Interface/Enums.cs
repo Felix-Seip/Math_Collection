@@ -35,13 +35,15 @@ namespace Math_Collection_Interface
             MatrixMultiplicationWithVector = 9,
             [Description("Multiply With Matrix")]
             MatrixMultiplicationWithMatrix = 10,
+            [Description("Potentiate Matrix")]
+            MatrixPotentiation = 11,
             [Description("Lower Left Pyramid Form")]
-            MatrixLowerLeftPyramidForm = 11,
+            MatrixLowerLeftPyramidForm = 12,
             [Description("Upper Right Pyramid Form")]
-            MatrixUpperRightPyramidForm = 12,
+            MatrixUpperRightPyramidForm = 13,
 
             [Description("Derivation of a Function")]
-            AnalysisDerivationOfFunction = 13
+            AnalysisDerivationOfFunction = 14
         }
     }
 }
