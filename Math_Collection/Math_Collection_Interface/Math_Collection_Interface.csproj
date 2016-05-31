@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ValueValidator.cs" />
     <Page Include="BasicsDegreesToRadians.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
