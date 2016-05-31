@@ -147,6 +147,21 @@ namespace Math_Collection.LinearAlgebra
         }
 
         /// <summary>
+        /// Raises a matrix to a power
+        /// </summary>
+        /// <param name="m">Matrix that should be raised</param>
+        /// <param name="pow">int value to which power the matrix should be taken</param>
+        /// <returns>the raised Matrix</returns>
+        public static Matrix RaiseTheMatrixToAPower(Matrix m, int pow)
+        {
+            for(int i = 0; i < pow; i++)
+            {
+                m = MultiplicationWithMatrix(m, m);
+            }
+            return m;
+        }
+
+        /// <summary>
         /// Adds a value to every element in a row
         /// </summary>
         public static Matrix AddValueToMatrixRowValues(Matrix matrix, double value, int rowIndex)
