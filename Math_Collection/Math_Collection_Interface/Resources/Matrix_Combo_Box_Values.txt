@@ -1,0 +1,16 @@
+﻿Matrix 2x2
+Matrix 2x3
+Matrix 2x4
+Matrix 2x5
+Matrix 3x2
+Matrix 3x3
+Matrix 3x4
+Matrix 3x5
+Matrix 4x2
+Matrix 4x3
+Matrix 4x4
+Matrix 4x5
+Matrix 5x2
+Matrix 5x3
+Matrix 5x4
+Matrix 5x5

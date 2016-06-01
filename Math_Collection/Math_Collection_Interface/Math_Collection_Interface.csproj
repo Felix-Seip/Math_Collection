@@ -57,10 +57,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ComboBoxParser.cs" />
     <Compile Include="VectorDotProduct.xaml.cs">
       <DependentUpon>VectorDotProduct.xaml</DependentUpon>
     </Compile>
     <Compile Include="ValueValidator.cs" />
+    <Compile Include="VectorMagnitude.xaml.cs">
+      <DependentUpon>VectorMagnitude.xaml</DependentUpon>
+    </Compile>
     <Page Include="BasicsDegreesToRadians.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -83,6 +87,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="VectorDotProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VectorMagnitude.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -125,6 +133,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Vector_Combo_Box_Values.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Matrix_Combo_Box_Values.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

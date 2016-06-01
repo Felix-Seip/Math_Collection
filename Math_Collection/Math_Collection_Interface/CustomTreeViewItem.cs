@@ -29,7 +29,7 @@ namespace Math_Collection_Interface
                 case Enums.MathOperations.VectorDotProduct:
                     return new VectorDotProduct();
                 case Enums.MathOperations.VectorMagnitude:
-                    return null;
+                    return new VectorMagnitude();
                 case Enums.MathOperations.VectorAdditionWithVector:
                     return null;
                 case Enums.MathOperations.VectorSubtractionWithVector:
