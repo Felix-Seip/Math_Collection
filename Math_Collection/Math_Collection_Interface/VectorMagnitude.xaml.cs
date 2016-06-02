@@ -72,25 +72,23 @@ namespace Math_Collection_Interface
         private void btnCalcMagnitude_Click(object sender, RoutedEventArgs e)
         {
             bool allValid = true;
-            foreach(TextBox tb in textBoxes)
+            double[] values = new double[textBoxes.Count];
+            for(int i=0;i<textBoxes.Count;i++)
             {
-                tb.BorderBrush = Brushes.Gray;
-                if (!ValueValidator.isValidNumber(tb.Text))
+                textBoxes[i].BorderBrush = Brushes.Gray;
+                if (!ValueValidator.isValidNumber(textBoxes[i].Text))
                 {
-                    tb.BorderBrush = Brushes.Red;
+                    textBoxes[i].BorderBrush = Brushes.Red;
                     allValid = false;
                 }
+                double.TryParse(textBoxes[i].Text, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out values[i]);
             }
             if (!allValid)
                 return;
 
-            double totalCount = 1.0;
-            foreach(TextBox tb in textBoxes)
-            {
-                totalCount *= double.Parse(tb.Text,CultureInfo.InvariantCulture);
-            }
+            Math_Collection.LinearAlgebra.Vectors.Vector v = new Math_Collection.LinearAlgebra.Vectors.Vector(values);
             result.FontSize = 20;
-            result.Content = "Result: " + Math.Sqrt(totalCount);
+            result.Content = "Result: " + v.Magnitude;
         }
     }
 }
