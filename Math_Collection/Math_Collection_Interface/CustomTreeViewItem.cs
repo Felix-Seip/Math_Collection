@@ -37,7 +37,7 @@ namespace Math_Collection_Interface
                 case Enums.MathOperations.VectorMultiplicationWithVector:
                     return null;
                 case Enums.MathOperations.VectorMultiplicationWithScalar:
-                    return null;
+                    return new VectorMultiplyScalar();
 
                 case Enums.MathOperations.MatrixTranspose:
                     return null;

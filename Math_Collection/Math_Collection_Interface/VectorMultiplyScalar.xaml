@@ -1,0 +1,40 @@
+﻿<Page x:Class="Math_Collection_Interface.VectorMultiplyScalar"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Math_Collection_Interface"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="VectorMultiplyScalar">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="96*"/>
+            <ColumnDefinition Width="101*"/>
+            <ColumnDefinition Width="103*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="51*"/>
+            <RowDefinition Height="61*"/>
+            <RowDefinition Height="73*"/>
+            <RowDefinition Height="68*"/>
+            <RowDefinition Height="47*"/>
+        </Grid.RowDefinitions>
+        <ComboBox x:Name="comboBoxVectorValues" Grid.ColumnSpan="1" Margin="0,10,0,0" Grid.Column="1" SelectionChanged="comboBoxVectorValues_SelectionChanged"/>
+        <TextBox x:Name="txtBoxScalar" Grid.ColumnSpan="1" Grid.Column="1" Margin="0,40,0,0" Grid.Row="2" TextWrapping="Wrap" Text=""/>
+        <Label x:Name="lblScalar" Content="Scalar" Grid.Column="1" Margin="0,0,103,0" Grid.Row="2" VerticalAlignment="Top" RenderTransformOrigin="-0.394,0.492" Grid.ColumnSpan="2"/>
+        <Grid x:Name="TextBoxGrid" Margin="0,51,0,0" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="20*"/>
+            </Grid.RowDefinitions>
+        </Grid>
+        <Button x:Name="btnCalculate" Content="Multiply" Grid.ColumnSpan="1" Grid.Column="2" Margin="0.2,0.2,-5,0" Grid.RowSpan="1" Grid.Row="4" Click="btnCalculate_Click"/>
+        <Label x:Name="lblResult" Content="" Grid.Column="1" Margin="0,0.2,0,0" Grid.Row="3" Grid.RowSpan="2"/>
+
+    </Grid>
+</Page>
