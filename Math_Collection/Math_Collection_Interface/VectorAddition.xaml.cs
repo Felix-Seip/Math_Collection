@@ -33,21 +33,19 @@ namespace Math_Collection_Interface
             return Properties.Resources.Vector_Combo_Box_Values.Split('\n');
         }
 
-        private void firstVectorSizeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void FirstVectorSizeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             object temp = firstVectorSizeComboBox.SelectedValue;
-            int count = ComboBoxParser.ComboBoxCount((string)temp);
-            CommonOperations.AddTextBoxesToGrid(firstVectorValuesGrid, count);
+            CommonOperations.AddTextBoxesToGrid(firstVectorValuesGrid, ComboBoxParser.VectorComboBoxCount((string)temp));
         }
 
-        private void secondVectorSizeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void SecondVectorSizeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             object temp = secondVectorSizeComboBox.SelectedValue;
-            int count = ComboBoxParser.ComboBoxCount((string)temp);
-            CommonOperations.AddTextBoxesToGrid(secondVectorValuesGrid, count);
+            CommonOperations.AddTextBoxesToGrid(secondVectorValuesGrid, ComboBoxParser.VectorComboBoxCount((string)temp));
         }
 
-        private void calculateButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void CalculateButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             if(CommonOperations.CheckGridTextBoxValues(firstVectorValuesGrid) && CommonOperations.CheckGridTextBoxValues(secondVectorValuesGrid))
             {
@@ -60,7 +58,7 @@ namespace Math_Collection_Interface
                     secondVectorValues.Add(double.Parse(((TextBox)secondVectorValuesGrid.Children[i]).Text));
 
                 Math_Collection.LinearAlgebra.Vectors.Vector result = LinearAlgebraOperations.AddVectorToVector(new Math_Collection.LinearAlgebra.Vectors.Vector(firstVectorValues.ToArray()), new Math_Collection.LinearAlgebra.Vectors.Vector(secondVectorValues.ToArray()));
-                resultLabel.Content = "Result: " + result;
+                resultLabel.Content = "Result: \n" + result;
                 resultLabel.FontSize = 20;
             }
         }

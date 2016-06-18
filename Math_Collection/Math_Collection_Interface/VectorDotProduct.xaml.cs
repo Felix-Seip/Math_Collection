@@ -37,14 +37,14 @@ namespace Math_Collection_Interface
         private void FirstVectorSizeComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             object temp = firstVectorSizeComboBox.SelectedValue;
-            int count = ComboBoxParser.ComboBoxCount((string)temp);
+            int count = ComboBoxParser.VectorComboBoxCount((string)temp);
             AddTextBoxes(0, count, "first");
         }
 
         private void SecondVectorSizeComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             object temp = secondVectorSizeComboBox.SelectedValue;
-            int count = ComboBoxParser.ComboBoxCount((string)temp);
+            int count = ComboBoxParser.VectorComboBoxCount((string)temp);
             AddTextBoxes(3, count, "second");
         }
 

@@ -59,6 +59,9 @@
     </ApplicationDefinition>
     <Compile Include="ComboBoxParser.cs" />
     <Compile Include="CommonOperations.cs" />
+    <Compile Include="MatrixTranspose.xaml.cs">
+      <DependentUpon>MatrixTranspose.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VectorAddition.xaml.cs">
       <DependentUpon>VectorAddition.xaml</DependentUpon>
     </Compile>
@@ -93,6 +96,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MatrixTranspose.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="VectorAddition.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

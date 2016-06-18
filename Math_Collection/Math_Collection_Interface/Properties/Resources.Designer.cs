@@ -77,6 +77,7 @@ namespace Math_Collection_Interface.Properties {
         ///- Multiply With Scalar
         ///- Multiply With Vector
         ///- Multiply With Matrix
+        ///- Potentiate Matrix
         ///- Lower Left Pyramid Form
         ///- Upper Right Pyramid Form
         ///
@@ -86,6 +87,30 @@ namespace Math_Collection_Interface.Properties {
         internal static string Functions {
             get {
                 return ResourceManager.GetString("Functions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Matrix 2x2
+        ///Matrix 2x3
+        ///Matrix 2x4
+        ///Matrix 2x5
+        ///Matrix 3x2
+        ///Matrix 3x3
+        ///Matrix 3x4
+        ///Matrix 3x5
+        ///Matrix 4x2
+        ///Matrix 4x3
+        ///Matrix 4x4
+        ///Matrix 4x5
+        ///Matrix 5x2
+        ///Matrix 5x3
+        ///Matrix 5x4
+        ///Matrix 5x5.
+        /// </summary>
+        internal static string Matrix_Combo_Box_Values {
+            get {
+                return ResourceManager.GetString("Matrix_Combo_Box_Values", resourceCulture);
             }
         }
         

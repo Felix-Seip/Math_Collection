@@ -1,0 +1,65 @@
+﻿<Page x:Class="Math_Collection_Interface.MatrixTranspose"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Math_Collection_Interface"
+      mc:Ignorable="d"
+      Title="MatrixTranspose" Height="610.5" Width="628">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="59*"/>
+            <RowDefinition Height="19*"/>
+            <RowDefinition Height="260*"/>
+            <RowDefinition Height="61*"/>
+            <RowDefinition Height="266*"/>
+            <RowDefinition Height="23*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="17*"/>
+            <ColumnDefinition Width="80*"/>
+            <ColumnDefinition Width="55*"/>
+            <ColumnDefinition Width="55*"/>
+            <ColumnDefinition Width="80*"/>
+            <ColumnDefinition Width="17*"/>
+        </Grid.ColumnDefinitions>
+        <ComboBox x:Name="matrixSizeComboBox" Margin="4,5,0,0" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" SelectionChanged="MatrixDimensionsChanged"/>
+        <Label x:Name="matrixSizeLabel" Content="Matrix Size:" Grid.Column="1" Margin="4,3,0,0" Grid.Row="1" Grid.ColumnSpan="2" />
+        <Grid x:Name="matrixValuesGrid" Grid.Column="1" Margin="2,3,0,7" Grid.Row="3" Grid.ColumnSpan="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="30*"/>
+            </Grid.RowDefinitions>
+        </Grid>
+        <Button x:Name="transposeMatrixButton" Grid.ColumnSpan="2" Content="Transpose" Grid.Column="2" Margin="2,1,0,0" Grid.Row="4" Click="TransposeMatrixButton_Click" />
+        <Grid x:Name="transposedMatrixValuesGrid" Grid.ColumnSpan="4" Grid.Column="1" Margin="3,3,0,5.5" Grid.Row="5" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="30*"/>
+            </Grid.RowDefinitions>
+        </Grid>
+
+    </Grid>
+</Page>

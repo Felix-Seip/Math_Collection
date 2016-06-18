@@ -24,8 +24,8 @@
             <ColumnDefinition Width="130*"/>
             <ColumnDefinition Width="15*"/>
         </Grid.ColumnDefinitions>
-        <ComboBox x:Name="firstVectorSizeComboBox" Margin="5,5,3,2" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" SelectionChanged="firstVectorSizeComboBox_SelectionChanged" />
-        <ComboBox x:Name="secondVectorSizeComboBox" Margin="5,5,2,0" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2" SelectionChanged="secondVectorSizeComboBox_SelectionChanged"/>
+        <ComboBox x:Name="firstVectorSizeComboBox" Margin="5,5,3,2" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" SelectionChanged="FirstVectorSizeComboBox_SelectionChanged" />
+        <ComboBox x:Name="secondVectorSizeComboBox" Margin="5,5,2,0" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2" SelectionChanged="SecondVectorSizeComboBox_SelectionChanged"/>
         <Label x:Name="label" Content="First Vector:" Margin="2,4,45,2" Grid.Row="1" Grid.Column="1" />
         <Label x:Name="label1" Content="Second Vector:" Margin="2,5,27,2" Grid.Row="2" Grid.Column="1" />
         <Label x:Name="firstVectorValuesLabel" Content="First Vector Values" Margin="4,11,0,0" Grid.Row="3" Grid.Column="1"/>
@@ -57,7 +57,7 @@
             </Grid.RowDefinitions>
         </Grid>
 
-        <Button x:Name="calculateButton" Content="Calculate" Grid.Column="3" Margin="3,0.333,14,0" Grid.Row="6" Height="35" VerticalAlignment="Top" Click="calculateButton_Click" Grid.ColumnSpan="2" />
+        <Button x:Name="calculateButton" Content="Calculate" Grid.Column="3" Margin="3,0.333,14,0" Grid.Row="6" Height="35" VerticalAlignment="Top" Click="CalculateButton_Click" Grid.ColumnSpan="2" />
         <Label x:Name="resultLabel" Content="" Grid.Column="1" Margin="1,1,0,0" Grid.Row="5" Grid.RowSpan="2" />
 
     </Grid>

@@ -40,7 +40,7 @@ namespace Math_Collection_Interface
                     return new VectorMultiplyScalar();
 
                 case Enums.MathOperations.MatrixTranspose:
-                    return null;
+                    return new MatrixTranspose();
                 case Enums.MathOperations.MatrixMultiplicationWithScalar:
                     return null;
                 case Enums.MathOperations.MatrixMultiplicationWithVector:

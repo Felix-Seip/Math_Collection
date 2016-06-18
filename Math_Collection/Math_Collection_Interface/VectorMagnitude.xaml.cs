@@ -48,7 +48,7 @@ namespace Math_Collection_Interface
         private void comboBoxVector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             object temp = comboBoxVector.SelectedValue;
-            int count = ComboBoxParser.ComboBoxCount((string)temp);
+            int count = ComboBoxParser.VectorComboBoxCount((string)temp);
             AddTextBoxes(0, count);
         }
 

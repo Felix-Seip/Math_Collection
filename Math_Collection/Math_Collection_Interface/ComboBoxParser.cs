@@ -8,7 +8,7 @@ namespace Math_Collection_Interface
 {
     static class ComboBoxParser
     {
-        public static int ComboBoxCount(string s)
+        public static int VectorComboBoxCount(string s)
         {
             int comboBoxCount = -1;
             if (s.ToLower().Contains("vector"))
@@ -23,22 +23,32 @@ namespace Math_Collection_Interface
                     comboBoxCount = -1;
                 }
             }
-            else if (s.ToLower().Contains("matrix"))
+            return comboBoxCount;
+        }
+
+        public static int[] MatrixComboBoxCount(string matrixPossibilityString)
+        {
+            int[] matrixDimensions = new int[2];
+            if (matrixPossibilityString.ToLower().Contains("matrix"))
             {
                 try
                 {
-                    string numberOfComboBoxes = s.Substring(s.IndexOf(' ') + 1);
+                    string numberOfComboBoxes = matrixPossibilityString.Substring(matrixPossibilityString.IndexOf(' ') + 1);
                     char[] values = numberOfComboBoxes.ToCharArray();
+
                     int firstValue, secoundValue;
                     int.TryParse(values[0].ToString(), out firstValue);
                     int.TryParse(values[2].ToString(), out secoundValue);
-                    comboBoxCount = firstValue * secoundValue;
-                }catch(ArgumentException ex)
+
+                    matrixDimensions[0] = firstValue;
+                    matrixDimensions[1] = secoundValue;
+                }
+                catch (ArgumentException ex)
                 {
-                    comboBoxCount = -1;
+                    matrixDimensions = null;
                 }
             }
-            return comboBoxCount;
+            return matrixDimensions;
         }
     }
 }
