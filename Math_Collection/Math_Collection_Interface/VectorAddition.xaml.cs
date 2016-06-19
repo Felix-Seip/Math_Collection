@@ -8,29 +8,13 @@ namespace Math_Collection_Interface
     /// <summary>
     /// Interaction logic for VectorAddition.xaml
     /// </summary>
-    public partial class VectorAddition : Page
+    public partial class VectorAddition : UserControl
     {
         public VectorAddition()
         {
             InitializeComponent();
-            FillComboBoxes();
-        }
-
-        private void FillComboBoxes()
-        {
-            string[] vectorPossibilities = ReadVectorComboBoxValues();
-            for (int i = 0; i < vectorPossibilities.Length; i++)
-            {
-                firstVectorSizeComboBox.Items.Add(vectorPossibilities[i]);
-                secondVectorSizeComboBox.Items.Add(vectorPossibilities[i]);
-            }
-            firstVectorSizeComboBox.SelectedIndex = 0;
-            secondVectorSizeComboBox.SelectedIndex = 0;
-        }
-
-        private string[] ReadVectorComboBoxValues()
-        {
-            return Properties.Resources.Vector_Combo_Box_Values.Split('\n');
+            CommonOperations.AddTextToComboBox(firstVectorSizeComboBox, Properties.Resources.Vector_Combo_Box_Values);
+            CommonOperations.AddTextToComboBox(secondVectorSizeComboBox, Properties.Resources.Vector_Combo_Box_Values);
         }
 
         private void FirstVectorSizeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

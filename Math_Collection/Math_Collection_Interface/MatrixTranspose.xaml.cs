@@ -18,39 +18,24 @@ namespace Math_Collection_Interface
     /// <summary>
     /// Interaction logic for MatrixTranspose.xaml
     /// </summary>
-    public partial class MatrixTranspose : Page
+    public partial class MatrixTranspose : UserControl
     {
         public MatrixTranspose()
         {
             InitializeComponent();
-            FillMatrixComboBox();
-        }
-
-        private void FillMatrixComboBox()
-        {
-            string[] matrixPossibilities = ReadMatrixComboBoxValues();
-            for (int i = 0; i < matrixPossibilities.Length; i++)
-            {
-                matrixSizeComboBox.Items.Add(matrixPossibilities[i]);
-            }
-            matrixSizeComboBox.SelectedIndex = 0;
-        }
-
-        private string[] ReadMatrixComboBoxValues()
-        {
-            return Properties.Resources.Matrix_Combo_Box_Values.Split('\n');
+            CommonOperations.AddTextToComboBox(matrixSizeComboBox, Properties.Resources.Matrix_Combo_Box_Values);
         }
 
         private void MatrixDimensionsChanged(object sender, SelectionChangedEventArgs e)
         {
             CommonOperations.AddTextBoxesToGrid(matrixValuesGrid, ComboBoxParser.MatrixComboBoxCount((string)matrixSizeComboBox.SelectedValue), true);
-            CommonOperations.AddTextBoxesToGrid(transposedMatrixValuesGrid, ComboBoxParser.MatrixComboBoxCount((string)matrixSizeComboBox.SelectedValue), false);
+            CommonOperations.AddTextBoxesToGrid(transposedMatrixValuesGrid, ComboBoxParser.MatrixComboBoxCount((string)matrixSizeComboBox.SelectedValue), false, true);
         }
 
         private void TransposeMatrixButton_Click(object sender, RoutedEventArgs e)
         {
-            CommonOperations.GetMatrixTextBoxValues(matrixValuesGrid, ComboBoxParser.MatrixComboBoxCount((string)matrixSizeComboBox.SelectedValue));
-            //CommonOperations.SetMatrixResultTextBoxes(transposedMatrixValuesGrid, ComboBoxParser.MatrixComboBoxCount((string)matrixSizeComboBox.SelectedValue));
+            Math_Collection.LinearAlgebra.Matrices.Matrix matrix = CommonOperations.GetMatrixTextBoxValues(matrixValuesGrid, ComboBoxParser.MatrixComboBoxCount((string)matrixSizeComboBox.SelectedValue));
+            CommonOperations.SetMatrixResultTextBoxes(transposedMatrixValuesGrid, Math_Collection.LinearAlgebra.LinearAlgebraOperations.TransposeMatrix(matrix), true);
         }
     }
 }

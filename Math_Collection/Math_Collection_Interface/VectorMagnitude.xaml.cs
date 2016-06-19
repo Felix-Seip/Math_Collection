@@ -19,7 +19,7 @@ namespace Math_Collection_Interface
     /// <summary>
     /// Interaktionslogik für VectorMagnitude.xaml
     /// </summary>
-    public partial class VectorMagnitude : Page
+    public partial class VectorMagnitude : UserControl
     {
         private List<TextBox> textBoxes;
 
@@ -27,22 +27,7 @@ namespace Math_Collection_Interface
         {
             textBoxes = new List<TextBox>();
             InitializeComponent();
-            FillComboBox();  
-        }
-
-        private void FillComboBox()
-        {
-            string[] vectorPossibilities = ReadVectorComboBoxValues();
-            for (int i = 0; i < vectorPossibilities.Length; i++)
-            {
-                comboBoxVector.Items.Add(vectorPossibilities[i]);
-            }
-            comboBoxVector.SelectedIndex = 0;
-        }
-
-        private string[] ReadVectorComboBoxValues()
-        {
-            return Properties.Resources.Vector_Combo_Box_Values.Split('\n');
+            CommonOperations.AddTextToComboBox(comboBoxVector, Properties.Resources.Vector_Combo_Box_Values);
         }
 
         private void comboBoxVector_SelectionChanged(object sender, SelectionChangedEventArgs e)

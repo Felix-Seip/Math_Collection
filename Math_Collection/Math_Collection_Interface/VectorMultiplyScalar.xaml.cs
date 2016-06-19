@@ -19,31 +19,15 @@ namespace Math_Collection_Interface
     /// <summary>
     /// Interaktionslogik für VectorMultiplyScalar.xaml
     /// </summary>
-    public partial class VectorMultiplyScalar : Page
+    public partial class VectorMultiplyScalar : UserControl
     {
         private List<TextBox> textBoxes;
         public VectorMultiplyScalar()
         {
             textBoxes = new List<TextBox>();
             InitializeComponent();
-            FillComboBox();
+            CommonOperations.AddTextToComboBox(comboBoxVectorValues, Properties.Resources.Vector_Combo_Box_Values);
         }
-
-        private void FillComboBox()
-        {
-            string[] vectorPossibilities = ReadVectorComboBoxValues();
-            for (int i = 0; i < vectorPossibilities.Length; i++)
-            {
-                comboBoxVectorValues.Items.Add(vectorPossibilities[i]);
-            }
-            comboBoxVectorValues.SelectedIndex = 0;
-        }
-
-        private string[] ReadVectorComboBoxValues()
-        {
-            return Properties.Resources.Vector_Combo_Box_Values.Split('\n');
-        }
-
         private void AddTextBoxes(int column, int textboxCount)
         {
             TextBoxGrid.Children.Clear();

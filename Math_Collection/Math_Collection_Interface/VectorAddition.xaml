@@ -1,12 +1,11 @@
-﻿<Page x:Class="Math_Collection_Interface.VectorAddition"
+﻿<UserControl x:Class="Math_Collection_Interface.VectorAddition"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Math_Collection_Interface"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-      Title="VectorAddition">
+      d:DesignHeight="300" d:DesignWidth="300">
     <Grid Margin="0,0,0,3">
         <Grid.RowDefinitions>
             <RowDefinition Height="13*"/>
@@ -61,4 +60,4 @@
         <Label x:Name="resultLabel" Content="" Grid.Column="1" Margin="1,1,0,0" Grid.Row="5" Grid.RowSpan="2" />
 
     </Grid>
-</Page>
+</UserControl>

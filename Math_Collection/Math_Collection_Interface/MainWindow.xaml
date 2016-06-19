@@ -25,7 +25,7 @@
         <Border BorderBrush="Black" BorderThickness="1" Margin="1,2.333,1,9.667" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">
             <TreeView x:Name="mathOperationsTreeView" SelectedItemChanged="SelectedOperationChanged"/>
         </Border>
-        <Frame x:Name="operationContentControl" Content="" Grid.Column="3" Margin="3,3,0,0" Grid.Row="1" />
+        <ContentControl x:Name="operationContentControl" Content="" Grid.Column="3" Margin="3,3,0,0" Grid.Row="1" />
 
     </Grid>
 </Window>

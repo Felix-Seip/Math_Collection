@@ -19,7 +19,7 @@ namespace Math_Collection_Interface
     /// <summary>
     /// Interaction logic for BasicsDegreesToRadians.xaml
     /// </summary>
-    public partial class BasicsDegreesToRadians : Page
+    public partial class BasicsDegreesToRadians : UserControl
     {
         public BasicsDegreesToRadians()
         {

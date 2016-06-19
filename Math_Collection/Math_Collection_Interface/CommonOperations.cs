@@ -45,14 +45,34 @@ namespace Math_Collection_Interface
             }
         }
 
-        public static void AddTextBoxesToGrid(Grid grid, int[] textboxCount, bool allowTextBoxInput)
+        public static void AddTextToComboBox(ComboBox comboBox, string file)
+        {
+            string[] cbValues = ReadFile(file);
+            for(int i = 0; i < cbValues.Length; i++)
+            {
+                comboBox.Items.Add(cbValues[i].Replace("\r", ""));
+            }
+            comboBox.SelectedIndex = 0;
+        }
+
+        private static string[] ReadFile(string file)
+        {
+            return file.Split('\n');
+        }
+
+        public static void AddTextBoxesToGrid(Grid grid, int[] textboxCount, bool allowTextBoxInput, bool transposeTextBoxes = false)
         {
             grid.Children.Clear();
-            for (int i = 0; i < textboxCount[0]; i++)
+            for (int i = 0; transposeTextBoxes == false ? i < textboxCount[0] : i < textboxCount[1]; i++)
             {
-                for (int j = 0; j < textboxCount[1]; j++)
+                for (int j = 0; transposeTextBoxes == false ? j < textboxCount[1] : j < textboxCount[0]; j++)
                 {
-                    TextBox valueInputTextBox = new TextBox();
+                    TextBox valueInputTextBox;
+                    if (allowTextBoxInput)
+                        valueInputTextBox = new CustomTextBox("MatrixInputValueTextBox" + i + "" + j);
+                    else
+                        valueInputTextBox = new CustomTextBox("MatrixOutputValueTextBox" + i + "" + j);
+
                     valueInputTextBox.SetValue(Grid.RowProperty, i);
                     valueInputTextBox.SetValue(Grid.RowSpanProperty, 1);
 
@@ -62,26 +82,9 @@ namespace Math_Collection_Interface
 
                     valueInputTextBox.IsEnabled = allowTextBoxInput;
 
-                    if (allowTextBoxInput)
-                        valueInputTextBox.SetValue(FrameworkElement.NameProperty, "MatrixInputValueTextBox" + i + "" + j);
-                    else
-                        valueInputTextBox.SetValue(FrameworkElement.NameProperty, "MatrixOutputValueTextBox" + i + "" + j);
                     grid.Children.Add(valueInputTextBox);
                 }
             }
-        }
-
-        public static void SetMatrixResultTextBoxes(Grid grid, int[] textboxCount)
-        {
-            //for (int i = 0; i < textboxCount[0]; i++)
-            //{
-            //    for (int j = 0; j < textboxCount[1]; j++)
-            //    {
-
-
-            //       // grid.Children.Add(valueInputTextBox);
-            //    }
-            //}
         }
 
         public static Matrix GetMatrixTextBoxValues(Grid grid, int[] textboxCount)
@@ -91,12 +94,33 @@ namespace Math_Collection_Interface
             {
                 for (int j = 0; j < textboxCount[1]; j++)
                 {
-                    string bla1 = "MatrixInputValueTextBox" + i + "" + j;
-                    object textBox = grid.FindName("MatrixInputValueTextBox" + i + "" + j);
-                    string bla = ((TextBox)textBox).Text;
+                    for (int k = 0; k < grid.Children.Count; k++)
+                    {
+                        if (((CustomTextBox)grid.Children[k]).TextBoxName == "MatrixInputValueTextBox" + i + "" + j)
+                        {
+                            double.TryParse(((CustomTextBox)grid.Children[k]).Text, out matrixValues[i, j]);
+                        }
+                    }
                 }
             }
             return new Matrix(matrixValues);
+        }
+
+        public static void SetMatrixResultTextBoxes(Grid grid, Matrix matrix, bool textBoxesAreTransposed = false)
+        {
+            for (int i = 0; textBoxesAreTransposed == false ? i < matrix.ColumnCount : i < matrix.RowCount; i++)
+            {
+                for (int j = 0; textBoxesAreTransposed == false ? j < matrix.RowCount : j < matrix.ColumnCount; j++)
+                {
+                    for (int k = 0; k < grid.Children.Count; k++)
+                    {
+                        if (((CustomTextBox)grid.Children[k]).TextBoxName.Equals("MatrixOutputValueTextBox" + i + "" + j, StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            ((CustomTextBox)grid.Children[k]).Text = matrix[i, j] + "";
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -13,6 +13,12 @@ namespace Math_Collection_Interface
         public CustomTreeViewItem(Enums.MathOperations operation, string header)
         {
             UserInterface = CheckOperationType(operation);
+            if (header.Contains("\r") || header.Contains("\n"))
+            {
+                header = header.Replace("\r", "");
+                header = header.Replace("\n", "");
+            }
+
             Header = header;
         }
 
@@ -48,7 +54,7 @@ namespace Math_Collection_Interface
                 case Enums.MathOperations.MatrixMultiplicationWithMatrix:
                     return null;
                 case Enums.MathOperations.MatrixPotentiation:
-                    return null;
+                    return new MatrixPotentiate();
                 case Enums.MathOperations.MatrixLowerLeftPyramidForm:
                     return null;
                 case Enums.MathOperations.MatrixUpperRightPyramidForm:
