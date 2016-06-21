@@ -66,6 +66,9 @@
     <Compile Include="MatrixTranspose.xaml.cs">
       <DependentUpon>MatrixTranspose.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ValidTextBox.xaml.cs">
+      <DependentUpon>ValidTextBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VectorAddition.xaml.cs">
       <DependentUpon>VectorAddition.xaml</DependentUpon>
     </Compile>
@@ -105,6 +108,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MatrixTranspose.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ValidTextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
