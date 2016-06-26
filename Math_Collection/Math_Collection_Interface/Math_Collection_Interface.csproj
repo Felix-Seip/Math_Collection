@@ -79,8 +79,14 @@
     <Compile Include="VectorMagnitude.xaml.cs">
       <DependentUpon>VectorMagnitude.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VectorMultiplication.xaml.cs">
+      <DependentUpon>VectorMultiplication.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VectorMultiplyScalar.xaml.cs">
       <DependentUpon>VectorMultiplyScalar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VectorSubtraction.xaml.cs">
+      <DependentUpon>VectorSubtraction.xaml</DependentUpon>
     </Compile>
     <Page Include="BasicsDegreesToRadians.xaml">
       <SubType>Designer</SubType>
@@ -127,7 +133,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="VectorMultiplication.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="VectorMultiplyScalar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VectorSubtraction.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

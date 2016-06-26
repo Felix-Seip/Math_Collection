@@ -1,18 +1,28 @@
 ﻿using Math_Collection.LinearAlgebra;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
 namespace Math_Collection_Interface
 {
     /// <summary>
-    /// Interaction logic for VectorAddition.xaml
+    /// Interaction logic for VectorMultiplication.xaml
     /// </summary>
-    
-    public partial class VectorAddition : UserControl
+    public partial class VectorMultiplication : UserControl
     {
-        private bool selectionChanged = false; //Rekursion verhindern
-        public VectorAddition()
+        private bool selectionChanged = false;
+        public VectorMultiplication()
         {
             InitializeComponent();
             CommonOperations.AddTextToComboBox(firstVectorSizeComboBox, Properties.Resources.Vector_Combo_Box_Values);
@@ -23,6 +33,7 @@ namespace Math_Collection_Interface
         {
             if (selectionChanged)
                 return;
+
 
             CommonOperations.AddTextBoxesToGrid(firstVectorValuesGrid, ComboBoxParser.VectorComboBoxCount((string)firstVectorSizeComboBox.SelectedValue));
             selectionChanged = true;
@@ -43,13 +54,13 @@ namespace Math_Collection_Interface
             CommonOperations.AddTextBoxesToGrid(firstVectorValuesGrid, ComboBoxParser.VectorComboBoxCount((string)firstVectorSizeComboBox.SelectedValue));
         }
 
-        private void CalculateButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void CalculateButton_Click(object sender, RoutedEventArgs e)
         {
             if (!CommonOperations.CheckGridTextBoxValues(firstVectorValuesGrid))
                 return;
             if (!CommonOperations.CheckGridTextBoxValues(secondVectorValuesGrid))
                 return;
-            
+
             List<double> firstVectorValues = new List<double>();
             List<double> secondVectorValues = new List<double>();
 
@@ -58,10 +69,9 @@ namespace Math_Collection_Interface
             for (int i = 0; i < secondVectorValuesGrid.Children.Count; i++)
                 secondVectorValues.Add(double.Parse(((TextBox)secondVectorValuesGrid.Children[i]).Text));
 
-            Math_Collection.LinearAlgebra.Vectors.Vector result = LinearAlgebraOperations.AddVectorToVector(new Math_Collection.LinearAlgebra.Vectors.Vector(firstVectorValues.ToArray()), new Math_Collection.LinearAlgebra.Vectors.Vector(secondVectorValues.ToArray()));
+            Math_Collection.LinearAlgebra.Vectors.Vector result = LinearAlgebraOperations.MultiplyVectorWithVector(new Math_Collection.LinearAlgebra.Vectors.Vector(firstVectorValues.ToArray()), new Math_Collection.LinearAlgebra.Vectors.Vector(secondVectorValues.ToArray()));
             resultLabel.Content = "Result: \n" + result;
             resultLabel.FontSize = 20;
         }
     }
 }
-

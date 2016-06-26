@@ -39,9 +39,9 @@ namespace Math_Collection_Interface
                 case Enums.MathOperations.VectorAdditionWithVector:
                     return new VectorAddition();
                 case Enums.MathOperations.VectorSubtractionWithVector:
-                    return null;
+                    return new VectorSubtraction();
                 case Enums.MathOperations.VectorMultiplicationWithVector:
-                    return null;
+                    return new VectorMultiplication();
                 case Enums.MathOperations.VectorMultiplicationWithScalar:
                     return new VectorMultiplyScalar();
 
