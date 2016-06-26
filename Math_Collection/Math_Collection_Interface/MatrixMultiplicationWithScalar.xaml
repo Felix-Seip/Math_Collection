@@ -1,0 +1,69 @@
+﻿<UserControl x:Class="Math_Collection_Interface.MatrixMultiplicationWithScalar"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Math_Collection_Interface"
+      mc:Ignorable="d" Height="610.5" Width="628">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="52*"/>
+            <RowDefinition Height="17*"/>
+            <RowDefinition Height="43*"/>
+            <RowDefinition Height="29*"/>
+            <RowDefinition Height="51*"/>
+            <RowDefinition Height="107*"/>
+            <RowDefinition Height="54*"/>
+            <RowDefinition Height="234*"/>
+            <RowDefinition Height="21*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="17*"/>
+            <ColumnDefinition Width="80*"/>
+            <ColumnDefinition Width="55*"/>
+            <ColumnDefinition Width="55*"/>
+            <ColumnDefinition Width="80*"/>
+            <ColumnDefinition Width="17*"/>
+        </Grid.ColumnDefinitions>
+        <ComboBox x:Name="comboBoxMatrixSize" Margin="3.6,4.6,35,0.4" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="3" SelectionChanged="MatrixDimensionsChanged"/>
+        <Label x:Name="lblMatrixSize" Content="Matrix Size:" Grid.Column="1" Margin="3.8,2.6,0.4,0.4" Grid.Row="1" Grid.ColumnSpan="2" />
+        <Grid x:Name="matrixGrid" Grid.Column="2" Margin="2.2,2.8,35,6.6" Grid.Row="3" Grid.ColumnSpan="4" Grid.RowSpan="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="30*"/>
+            </Grid.RowDefinitions>
+        </Grid>
+        <Button x:Name="btnMultiply" Grid.ColumnSpan="2" Content="Multiply" Grid.Column="2" Margin="2.2,1.4,0,0.2" Grid.Row="7" Click="btnMultiplication_Click"/>
+        <Grid x:Name="resultMatrixGrid" Grid.ColumnSpan="5" Grid.Column="1" Margin="2.8,2.8,35,5.6" Grid.Row="8" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="30*"/>
+            </Grid.RowDefinitions>
+        </Grid>
+        <TextBox x:Name="txtBoxScalar" Margin="35,28.6,113.4,0.4" Grid.Row="4" TextWrapping="Wrap" Text="0" Grid.ColumnSpan="3" Grid.RowSpan="2" TextAlignment="Center"/>
+        <Label x:Name="lblScalar" Content="Scalar" Grid.Column="1" Margin="3.8,42.8,113.4,0.2" Grid.Row="3" Grid.RowSpan="2" Grid.ColumnSpan="2" />
+
+    </Grid>
+</UserControl>

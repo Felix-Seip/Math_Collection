@@ -48,7 +48,7 @@ namespace Math_Collection_Interface
                 case Enums.MathOperations.MatrixTranspose:
                     return new MatrixTranspose();
                 case Enums.MathOperations.MatrixMultiplicationWithScalar:
-                    return null;
+                    return new MatrixMultiplicationWithScalar();
                 case Enums.MathOperations.MatrixMultiplicationWithVector:
                     return null;
                 case Enums.MathOperations.MatrixMultiplicationWithMatrix:
