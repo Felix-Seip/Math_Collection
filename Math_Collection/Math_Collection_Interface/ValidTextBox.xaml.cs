@@ -38,6 +38,8 @@ namespace Math_Collection_Interface
             }
         }
 
+        public string TextBoxName { get; set; }
+        public string TextBoxValue { get; private set; }
         private string _header;
         public string Header
         {
@@ -50,9 +52,10 @@ namespace Math_Collection_Interface
                 lblHeader.Content = _header;
             }
         }
-        public ValidTextBox(string header = "")
+        public ValidTextBox(string textBoxName, string header = "")
         {
             InitializeComponent();
+            TextBoxName = textBoxName;
             IsValid = true;
             Header = header;
         }
@@ -60,6 +63,13 @@ namespace Math_Collection_Interface
         private void txtBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             IsValid = ValueValidator.isValidNumber(txtBox.Text);
+            if (IsValid)
+                TextBoxValue = txtBox.Text;
+        }
+
+        public void SetTextBoxValue(string textBoxValue)
+        {
+            txtBox.Text = textBoxValue;
         }
     }
 }

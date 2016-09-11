@@ -67,7 +67,7 @@ namespace Math_Collection_Interface
             {
                 for (int j = 0; transposeTextBoxes == false ? j < textboxCount[1] : j < textboxCount[0]; j++)
                 {
-                    TextBox valueInputTextBox;
+                    CustomTextBox valueInputTextBox;
                     if (allowTextBoxInput)
                         valueInputTextBox = new CustomTextBox("MatrixInputValueTextBox" + i + "" + j);
                     else
@@ -81,6 +81,7 @@ namespace Math_Collection_Interface
                     valueInputTextBox.Margin = new Thickness(10);
 
                     valueInputTextBox.IsEnabled = allowTextBoxInput;
+                    valueInputTextBox.Visibility = Visibility.Visible;
 
                     grid.Children.Add(valueInputTextBox);
                 }
@@ -98,7 +99,8 @@ namespace Math_Collection_Interface
                     {
                         if (((CustomTextBox)grid.Children[k]).TextBoxName == "MatrixInputValueTextBox" + i + "" + j)
                         {
-                            double.TryParse(((CustomTextBox)grid.Children[k]).Text, out matrixValues[i, j]);
+                            //if(((TextBox)grid.Children[k]).IsValid)
+                                double.TryParse(((CustomTextBox)grid.Children[k]).TextBoxName, out matrixValues[i, j]);
                         }
                     }
                 }
@@ -116,7 +118,7 @@ namespace Math_Collection_Interface
                     {
                         if (((CustomTextBox)grid.Children[k]).TextBoxName.Equals("MatrixOutputValueTextBox" + i + "" + j, StringComparison.InvariantCultureIgnoreCase))
                         {
-                            ((CustomTextBox)grid.Children[k]).Text = matrix[i, j] + "";
+                            ((CustomTextBox)grid.Children[k]).Text = (matrix[i, j] + "");
                         }
                     }
                 }

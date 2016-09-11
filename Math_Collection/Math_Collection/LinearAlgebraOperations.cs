@@ -266,6 +266,49 @@ namespace Math_Collection.LinearAlgebra
             return new Matrix(newMatrix);
         }
 
+        public static Matrix CopyUnderlyingMatrix(int row, int column, Matrix matrix)
+        {
+            double[,] newMatrix = new double[matrix.RowCount - 1, matrix.ColumnCount - 1];
+            for (int i = 0, j = 0; i < matrix.RowCount; i++)
+            {
+                if (i == row)
+                    continue;
+
+                for (int k = 0, u = 0; k < matrix.ColumnCount; k++)
+                {
+                    if (k == column)
+                        continue;
+
+                    newMatrix[j, u] = matrix[i, k];
+                    u++;
+                }
+                j++;
+            }
+
+            return new Matrix(newMatrix);
+        }
+
+        public static double CalculateDeterminant(Matrix determinantMatrix)
+        {
+            double determinant = 0;
+
+            if (determinantMatrix.ColumnCount > 2 && determinantMatrix.RowCount > 2)
+            {
+                for (int j = 0; j < determinantMatrix.ColumnCount; j++)
+                {
+                    determinant += Math.Pow(-1, 1 + j + 1) * determinantMatrix[j, 0] * CalculateDeterminant(CopyUnderlyingMatrix(j, 0, determinantMatrix));
+                    double bla = determinant;
+                }
+
+            }
+            else
+            {
+                Console.WriteLine("\n" + determinantMatrix.ToString());
+                determinant += determinantMatrix[0, 0] * determinantMatrix[1, 1] - determinantMatrix[0, 1] * determinantMatrix[1, 0];
+            }
+            return determinant;
+        }
+
         /// <summary>
         /// Calculates the upper right and lower left pyramid matrix.
         /// </summary>
