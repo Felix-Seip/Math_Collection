@@ -37,8 +37,7 @@ namespace Math_Collection.LinearAlgebra.Matrices
         {
             get
             {
-                //TODO: Implement calculate determinant
-                throw new NotImplementedException();
+                return LinearAlgebra.LinearAlgebraOperations.CalculateDeterminant(this);
             }
             private set { }
         }
