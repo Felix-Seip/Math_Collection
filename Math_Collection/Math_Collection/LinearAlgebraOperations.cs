@@ -331,5 +331,34 @@ namespace Math_Collection.LinearAlgebra
             }
             return L;
         }
+
+        public static Matrix CalculateInverseMatrix(Matrix inputMatrix)
+        {
+            for (int i = 0; i < inputMatrix.RowCount; i++)
+            {
+                for (int j = 0; j < inputMatrix.RowCount; j++)
+                {
+                    if (i != j)
+                    {
+                        double ratio = inputMatrix[j, i] / inputMatrix[i, i];
+                        for (int k = 0; k < inputMatrix.ColumnCount; k++)
+                        {
+                            inputMatrix[j, k] -= ratio * inputMatrix[i, k];
+                        }
+                    }
+                }
+            }
+            for (int i = 0; i < inputMatrix.RowCount; i++)
+            {
+                double a = inputMatrix[i, i];
+                for (int j = 0; j < inputMatrix.RowCount; j++)
+                {
+                    inputMatrix[i, j] /= a;
+                }
+            }
+            return inputMatrix;
+        }
+
+
     }
 }

@@ -32,7 +32,7 @@ namespace Math_Collection_UnitTest
             //not enough values
             values.Add(3);
             expected = double.NaN;
-            actual = Analysis.Derivation_Approximation(values.ToArray(), 1, h);
+            //actual = Analysis.Derivation_Approximation(values.ToArray(), 1, h);
             Assert.AreEqual(expected, actual);
             values.Clear();
 
@@ -41,7 +41,7 @@ namespace Math_Collection_UnitTest
                 values.Add(3.0);
 
             expected = 0.0;
-            actual = Analysis.Derivation_Approximation(values.ToArray(), 2, h);
+            //actual = Analysis.Derivation_Approximation(values.ToArray(), 2, h);
             Assert.AreEqual(expected, actual);
             values.Clear();
 
@@ -49,7 +49,7 @@ namespace Math_Collection_UnitTest
             values.Add(1);
             values.Add(4);
             expected = 2.0;
-            actual = Analysis.Derivation_Approximation(values.ToArray(), 1, h, true);
+            //actual = Analysis.Derivation_Approximation(values.ToArray(), 1, h, true);
             Assert.AreEqual(expected, actual);
             
         }
