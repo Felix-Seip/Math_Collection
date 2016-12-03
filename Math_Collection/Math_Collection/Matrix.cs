@@ -74,8 +74,13 @@ namespace Math_Collection.LinearAlgebra.Matrices
         public Matrix() { }
         public Matrix(double[,] matrix)
         {
-            Values = matrix;
+            Values = (double[,])matrix.Clone();
         }
+
+		public Matrix(Matrix matrix)
+		{
+			Values = matrix.Values;
+		}
 
         public override string ToString()
         {
@@ -90,5 +95,24 @@ namespace Math_Collection.LinearAlgebra.Matrices
             }
             return matrixAsString;
         }
-    }
+
+		public override bool Equals(object obj)
+		{
+			Matrix tmp = obj as Matrix;
+			if (tmp == null)
+				return false;
+
+			bool equal = true;
+
+			for(int i = 0; i< RowCount; i++)
+			{
+				for(int k = 0; k<ColumnCount; k++)
+				{
+					if (Values[i,k] != tmp[i,k])
+						equal = false;
+				}
+			}
+			return equal;
+		}
+	}
 }

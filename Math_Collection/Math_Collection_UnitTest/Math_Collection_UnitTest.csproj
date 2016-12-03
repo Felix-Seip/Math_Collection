@@ -55,6 +55,7 @@
     <Compile Include="Analysis_Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LinearAlgebra_Test.cs" />
+    <Compile Include="Basics_Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Math_Collection\Math_Collection.csproj">

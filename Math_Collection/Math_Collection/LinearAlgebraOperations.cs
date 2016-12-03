@@ -224,6 +224,32 @@ namespace Math_Collection.LinearAlgebra
             return matrix;
         }
 
+		/// <summary>
+		/// Changes a whole Column of a Matrix with the Vector Values
+		/// Uses for Cramersche Regel
+		/// </summary>
+		/// <param name="sourceMatrix">Matrix that should be changed</param>
+		/// <param name="changeWith">Vector that is set into to the matrix</param>
+		/// <param name="columnIndex">column that changes</param>
+		/// <returns>the changed Matrix or null if something fails</returns>
+		public static Matrix ChangeColumnInMatrix(Matrix sourceMatrix, Vector changeWith, int columnIndex)
+		{
+			if (sourceMatrix.ColumnCount != changeWith.Size)
+				return null;
+
+			if (columnIndex < 0 || columnIndex > sourceMatrix.ColumnCount)
+				return null;
+
+			Matrix changedMatrix = new Matrix(sourceMatrix.Values);
+
+			for (int i=0; i < sourceMatrix.RowCount; i++)
+			{
+				changedMatrix[i,columnIndex] = changeWith[i];
+			}
+
+			return changedMatrix;
+		}
+
         /// <summary>
         /// Returns the transposed version of the matrix.
         /// </summary>

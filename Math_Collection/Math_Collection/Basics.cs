@@ -15,7 +15,14 @@ namespace Math_Collection.Basics
             return (degrees / 180) * Math.PI;
         }
 
-        public static Vector JacobiMethod(Matrix inputMatrix, Vector expectedOutcome, int iterations)
+		/// <summary>
+		/// Calculates a approximated result of an LGS with the JacobiMethod
+		/// </summary>
+		/// <param name="inputMatrix"></param>
+		/// <param name="expectedOutcome"></param>
+		/// <param name="iterations"></param>
+		/// <returns></returns>
+        public static Vector SolveLGSApproximated(Matrix inputMatrix, Vector expectedOutcome, int iterations)
         {
             Vector solvedVector = new Vector(Enumerable.Repeat(0.0, expectedOutcome.Values.Length).ToArray());
             for (int p = 0; p < iterations; p++)
@@ -30,9 +37,31 @@ namespace Math_Collection.Basics
                     }
                     solvedVector.Values[i] = (expectedOutcome[i] - sigma) / inputMatrix[i, i];
                 }
-                //Console.WriteLine("Step #" + p + ": " + String.Join(", ", solvedVector.Values.Select(v => v.ToString()).ToArray()));
             }
             return solvedVector;
         }
+
+		/// <summary>
+		/// Calculates the result of an LGS with the Determinant Algorithm (Cramersche Regel)
+		/// </summary>
+		/// <param name="inputMatrix"></param>
+		/// <param name="outcome"></param>
+		/// <returns>The result as an Vector or null if it fails</returns>
+		public static Vector SolveLGSDeterminant(Matrix inputMatrix, Vector outcome)
+		{
+			if (inputMatrix.Determinant == 0)
+				return null;
+
+			Vector result = new Vector(new double[outcome.Size]);
+			double inputDeterminante = inputMatrix.Determinant;
+
+			for (int i = 0; i<inputMatrix.ColumnCount; i++)
+			{
+				Matrix xi = LinearAlgebra.LinearAlgebraOperations.ChangeColumnInMatrix(inputMatrix,outcome,i);
+				result[i] = xi.Determinant / inputDeterminante;
+			}
+
+			return result;
+		}
     }
 }
