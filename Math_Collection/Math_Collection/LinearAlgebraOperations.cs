@@ -224,15 +224,70 @@ namespace Math_Collection.LinearAlgebra
             return matrix;
         }
 
-		/// <summary>
-		/// Changes a whole Column of a Matrix with the Vector Values
-		/// Uses for Cramersche Regel
-		/// </summary>
-		/// <param name="sourceMatrix">Matrix that should be changed</param>
-		/// <param name="changeWith">Vector that is set into to the matrix</param>
-		/// <param name="columnIndex">column that changes</param>
-		/// <returns>the changed Matrix or null if something fails</returns>
-		public static Matrix ChangeColumnInMatrix(Matrix sourceMatrix, Vector changeWith, int columnIndex)
+        /// <summary>
+        /// Switch two rows within the matrix
+        /// </summary>
+        /// <param name="input">Matrix within the rows should switch</param>
+        /// <param name="rowToSwitch">index of row that switch</param>
+        /// <param name="rowToSwitchWith">index of row to switch with</param>
+        /// <returns>Changed matrix or null if it fails</returns>
+        public static Matrix SwitchRows(Matrix input, int rowToSwitch, int rowToSwitchWith)
+        {
+            if (input == null)
+                return null;
+
+            if (rowToSwitch < 0 || rowToSwitch > input.RowCount)
+                return input;
+
+            if (rowToSwitchWith < 0 || rowToSwitchWith > input.RowCount)
+                return input;
+
+            if (rowToSwitch == rowToSwitchWith)
+                return input;
+
+            double[] valuesOfRowToSwitch = CopyRow(input, rowToSwitch);
+
+            for (int i = 0; i < input.RowCount; i++)
+            {
+                input[rowToSwitch, i] = input[rowToSwitchWith, i];
+                input[rowToSwitchWith, i] = valuesOfRowToSwitch[i];
+            }
+
+            return input;
+        }
+
+        /// <summary>
+        /// Copies a whole row out of a matrix
+        /// </summary>
+        /// <param name="input">source matrix</param>
+        /// <param name="rowIndex">row that will be copied</param>
+        /// <returns>Array with all values of row or null if it fails</returns>
+        private static double[] CopyRow(Matrix input, int rowIndex)
+        {
+            if (input == null)
+                return null;
+
+            if (rowIndex < 0 || rowIndex > input.RowCount)
+                return null;
+
+            double[] row = new double[input.RowCount];
+            for (int i = 0; i < input.RowCount; i++)
+            {
+                row[i] = input[rowIndex, i];
+            }
+
+            return row;
+        }
+
+        /// <summary>
+        /// Changes a whole Column of a Matrix with the Vector Values
+        /// Uses for Cramersche Regel
+        /// </summary>
+        /// <param name="sourceMatrix">Matrix that should be changed</param>
+        /// <param name="changeWith">Vector that is set into to the matrix</param>
+        /// <param name="columnIndex">column that changes</param>
+        /// <returns>the changed Matrix or null if something fails</returns>
+        public static Matrix ChangeColumnInMatrix(Matrix sourceMatrix, Vector changeWith, int columnIndex)
 		{
 			if (sourceMatrix.ColumnCount != changeWith.Size)
 				return null;
