@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="AnalysisBase.cs" />
     <Compile Include="Basics.cs" />
+    <Compile Include="LGS.cs" />
     <Compile Include="LinearAlgebraOperations.cs" />
     <Compile Include="Matrix.cs" />
     <Compile Include="ProjectionsMatrix.cs" />

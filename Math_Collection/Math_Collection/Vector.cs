@@ -46,7 +46,12 @@ namespace Math_Collection.LinearAlgebra.Vectors
 
 		public Vector(double[] values)
 		{
-			Values = values;
+			Values = (double[])values.Clone();
+		}
+
+		public Vector(Vector v)
+		{
+			Values = v.Values;
 		}
 
 		/// <summary>
