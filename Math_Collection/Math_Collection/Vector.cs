@@ -77,6 +77,14 @@ namespace Math_Collection.LinearAlgebra.Vectors
 			return vectorAsString;
 		}
 
+        public void FlushVectorValues()
+        {
+            for(int i = 0; i < Size; i++)
+            {
+                Values[i] = 0;
+            }
+        }
+
 		public override bool Equals(object obj)
 		{
 			Vector tmp = obj as Vector;

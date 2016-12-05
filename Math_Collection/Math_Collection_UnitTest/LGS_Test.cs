@@ -12,13 +12,13 @@ namespace Math_Collection_UnitTest
 		[TestMethod]
 		public void Solve_Test()
 		{
-			Matrix m = new Matrix(new double[3,3] { { 0,3,1 },{ 2,4,6 },{ 3,3,9 } });
-			Vector v = new Vector(new double[3] { 0,2,-6 });
+			Matrix m = new Matrix(new double[4,4] { { 1,1,1,1},{ 1,1,-1, -1},{ 1,-1,1, 1}, { 1, -1, -1, 1}});
+			Vector v = new Vector(new double[4] { 0,1,3, -1});
 
 			LGS lgs = new LGS(m,v);
 			Vector result = lgs.Solve(LGS.SolveAlgorithm.Gauß);
 
-			Vector expected = new Vector(new double[3] { 22,3,-9 });
+			Vector expected = new Vector(new double[6] { 1,-2,3,4,2,-1});
 
 			Assert.AreEqual(expected,result);
 

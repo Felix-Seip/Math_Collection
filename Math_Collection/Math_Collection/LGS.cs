@@ -190,11 +190,10 @@ namespace Math_Collection
 			Matrix calcMatrix = new Matrix(KoeffizientenMatrix.Values);
 			Vector calcVector = new Vector(ExpansionVector.Values);
 
-			// Elemination
+			// Elimination
 			for (int i = 0; i < calcMatrix.RowCount - 1; i++)
 			{
 				int actualRow = i;
-
 				int pivotRow = calcMatrix.NextPivotRow(i,i);
 
 				if (actualRow != pivotRow)
@@ -203,21 +202,43 @@ namespace Math_Collection
 				EleminatePivotColumn(calcMatrix,calcVector,i,i);
 			}
 
-			Vector result = new Vector(Enumerable.Repeat(1.0,ExpansionVector.Size).ToArray());
-
-			//TODO: Plug In
-			for (int k = KoeffizientenMatrix.RowCount - 1; k >= 0; k--)
-			{
-				double parameter = 0;
-				for (int m = 0; m < KoeffizientenMatrix.ColumnCount; m++)
-				{
-					parameter += calcMatrix[k,m] * result[m];
-				}
-				result[k] = calcVector[k] / parameter;
-			}
-
-			return result;
+			return ReversePlugIn(calcMatrix, calcVector);
 		}
+
+        private double FindVariableValue(double vectorValue, double matrixValue)
+        {
+            return vectorValue / matrixValue;
+        }
+
+        private Vector ReversePlugIn(Matrix calcMatrix, Vector calcVector)
+        {
+            Vector parameter = new Vector(calcVector.Values);
+            parameter.FlushVectorValues();
+            for (int k = calcMatrix.RowCount - 1; k >= 0; k--)
+            {
+                for (int m = 0; m < calcMatrix.ColumnCount; m++)
+                {
+                    if (calcMatrix[k, m] != 0 && k == calcMatrix.RowCount - 1)
+                    {
+                        parameter[k] = FindVariableValue(calcVector[k], calcMatrix[k, m]);
+                    }
+                    else if(calcMatrix[k, m] != 0)
+                    {
+                        for(int i = 0; i < parameter.Size; i++)
+                        {
+                            if (parameter[i] != 0)
+                            {
+                                double bla = calcMatrix[k, i];
+                                calcVector[k] -= calcMatrix[k, i] * parameter[i];
+                            }
+                        }
+                        parameter[k] = FindVariableValue(calcVector[k], calcMatrix[k, m]);
+                        break;
+                    }
+                }
+            }
+            return parameter;
+        }
 
 		/// <summary>
 		/// Turns every value in the column under the pivotRow to zero#
