@@ -56,6 +56,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LinearAlgebra_Test.cs" />
     <Compile Include="LGS_Test.cs" />
+    <Compile Include="Polynominal_Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Math_Collection\Math_Collection.csproj">

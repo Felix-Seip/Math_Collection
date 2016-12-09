@@ -45,6 +45,7 @@
     <Compile Include="LGS.cs" />
     <Compile Include="LinearAlgebraOperations.cs" />
     <Compile Include="Matrix.cs" />
+    <Compile Include="Polynominal.cs" />
     <Compile Include="ProjectionsMatrix.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RotationsMatrix.cs" />

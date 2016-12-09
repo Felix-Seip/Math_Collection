@@ -2,6 +2,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using Analysis = Math_Collection.Analysis.AnalysisBase;
+using Math_Collection.LinearAlgebra.Vectors;
+using Math_Collection;
 
 namespace Math_Collection_UnitTest
 {
