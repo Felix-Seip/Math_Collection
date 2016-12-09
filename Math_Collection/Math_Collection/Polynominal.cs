@@ -75,7 +75,7 @@ namespace Math_Collection.Functions
 			double value = 0;
 			for (int i = 0; i < Parameters.Length; i++)
 			{
-				value += Parameters[i] * Math.Pow(x,i);
+				value += Parameters[i] * Math.Pow(x,Exponents[i]);
 			}
 			return value;
 		}
@@ -88,7 +88,7 @@ namespace Math_Collection.Functions
 			for (int j = 0; j < Parameters.Length; j++)
 			{
 
-				derivation[j] += Exponents[j] * Parameters[j];
+				derivation[j] = Exponents[j] * Parameters[j];
 
 				//Decrease the exponent by one after the multiplication.
 				if (expo[j] != 0)
@@ -107,21 +107,21 @@ namespace Math_Collection.Functions
 					continue;
 
 				function += Parameters[i];
-				if (Exponents[i] == 0.0)
+				if (Exponents[i].Equals(0.0))
 				{
 					function += " + ";
 				}
-				else if (Exponents[i] == 1.0)
+				else if (Exponents[i].Equals(1.0))
 				{
 					function += "x + ";
 				}
 				else
 				{
-					if (i != Parameters.Length - 1)
-						function += "x^" + Exponents[i] + "+ ";
-					else
-						function += "x^" + Exponents[i];
+					function += "x^" + Exponents[i] + "+ ";
 				}
+
+				if (i == Parameters.Length - 1)
+					function = function.Remove(function.LastIndexOf('+'));
 			}
 			return function;
 		}
