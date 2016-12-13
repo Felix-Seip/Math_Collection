@@ -31,7 +31,7 @@ namespace Math_Collection.Functions
 		public int Order
 		{
 			get { return _order; }
-			private set { _order = value; }
+			set { _order = value; }
 		}
 
 		private double[] _exponents;
@@ -69,6 +69,8 @@ namespace Math_Collection.Functions
 			}
 			Order = order;
 		}
+
+		public Polynominal() { }
 
 		public double FunctionValue(double x)
 		{
