@@ -1,15 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Math_Collection", "Math_Collection\Math_Collection.csproj", "{9F7BCFE6-D502-4A3B-8F08-56A909B1886F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Math_Collection_Interface", "Math_Collection_Interface\Math_Collection_Interface.csproj", "{6D42F648-9639-40BF-A3E4-F3027E728A4A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Math_Collection_UnitTest", "Math_Collection_UnitTest\Math_Collection_UnitTest.csproj", "{5F1CE746-EA7C-4534-B5F8-B7D740FC1878}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionParser", "FunctionParser\FunctionParser.csproj", "{8BCD7C92-AC18-4944-8486-49D1AB3CA221}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +27,6 @@ Global
 		{5F1CE746-EA7C-4534-B5F8-B7D740FC1878}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F1CE746-EA7C-4534-B5F8-B7D740FC1878}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F1CE746-EA7C-4534-B5F8-B7D740FC1878}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8BCD7C92-AC18-4944-8486-49D1AB3CA221}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8BCD7C92-AC18-4944-8486-49D1AB3CA221}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8BCD7C92-AC18-4944-8486-49D1AB3CA221}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8BCD7C92-AC18-4944-8486-49D1AB3CA221}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
