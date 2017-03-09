@@ -53,6 +53,12 @@
     <Compile Include="TranslationsMatrix.cs" />
     <Compile Include="Vector.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FunctionParser\FunctionParser.csproj">
+      <Project>{8bcd7c92-ac18-4944-8486-49d1ab3ca221}</Project>
+      <Name>FunctionParser</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
