@@ -1,60 +1,14 @@
 ﻿using Math_Collection.LinearAlgebra.Matrices;
 using Math_Collection.LinearAlgebra.Vectors;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using static Math_Collection.Enums;
 
 namespace Math_Collection.LGS
 {
 	public class LGS
 	{
 
-		public enum LGSType
-		{
-			/// <summary>
-			/// Default value. LGS is not solved yet
-			/// </summary>
-			NotSolved,
-			/// <summary>
-			/// LGS have no solution
-			/// </summary>
-			Unsolvable,
-			/// <summary>
-			/// LGS have just one unique solution
-			/// </summary>
-			Unique,
-			/// <summary>
-			/// LGS have infinite solutions
-			/// </summary>
-			Infinite
-		}
-
-		public enum SolveAlgorithm
-		{
-			/// <summary>
-			/// Uses the algorithm that is best for the given input
-			/// </summary>
-			Automatic,
-			/// <summary>
-			/// Solves the LGS only approximated
-			/// </summary>
-			Approximated,
-			/// <summary>
-			/// Solves the LGS with the Gramersche Rule
-			/// https://de.wikipedia.org/wiki/Cramersche_Regel
-			/// </summary>
-			Determinant,
-			/// <summary>
-			/// Solves the LGS with the Gauß Algorithm
-			/// https://de.wikipedia.org/wiki/Gau%C3%9Fsches_Eliminationsverfahren
-			/// </summary>
-			Gauß
-		}
-
-		private LGSType _resultType;
-		public LGSType ResultType
+		private ELGSType _resultType;
+		public ELGSType ResultType
 		{
 			get { return _resultType; }
 			private set { _resultType = value; }
@@ -78,23 +32,23 @@ namespace Math_Collection.LGS
 		{
 			KoeffizientenMatrix = input;
 			ExpansionVector = outcome;
-			ResultType = LGSType.NotSolved;
+			ResultType = ELGSType.eNotSolved;
 		}
 
-		public Vector Solve(SolveAlgorithm usedAlgorithm = SolveAlgorithm.Automatic)
+		public Vector Solve(ESolveAlgorithm usedAlgorithm = ESolveAlgorithm.eAutomatic)
 		{
 			if (!KoeffizientenMatrix.IsSqaureMatrix)
 				return null;
 
-			if (usedAlgorithm != SolveAlgorithm.Automatic)
+			if (usedAlgorithm != ESolveAlgorithm.eAutomatic)
 			{
 				switch (usedAlgorithm)
 				{
-					case SolveAlgorithm.Approximated:
+					case ESolveAlgorithm.eApproximated:
 					return SolveLGSApproximated(50);
-					case SolveAlgorithm.Determinant:
+					case ESolveAlgorithm.eDeterminant:
 					return SolveLGSDeterminant();
-					case SolveAlgorithm.Gauß:
+					case ESolveAlgorithm.eGauß:
 					return SolveLGSGauß();
 					default:
 					return null;
@@ -146,7 +100,7 @@ namespace Math_Collection.LGS
 					solvedVector.Values[i] = (ExpansionVector[i] - sigma) / KoeffizientenMatrix[i,i];
 				}
 			}
-			ResultType = LGSType.Unique;
+			ResultType = ELGSType.eUnique;
 			return solvedVector;
 		}
 

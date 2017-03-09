@@ -16,7 +16,7 @@ namespace Math_Collection_UnitTest
 			Vector v = new Vector(new double[4] { 0,1,3, -1});
 
 			LGS lgs = new LGS(m,v);
-			Vector result = lgs.Solve(LGS.SolveAlgorithm.Gauß);
+			Vector result = lgs.Solve(LGS.ESolveAlgorithm.eGauß);
 
 			Vector expected = new Vector(new double[6] { 1,-2,3,4,2,-1});
 
