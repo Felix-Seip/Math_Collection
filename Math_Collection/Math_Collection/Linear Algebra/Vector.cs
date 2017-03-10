@@ -95,7 +95,9 @@ namespace Math_Collection.LinearAlgebra.Vectors
 
 			for (int k = 0; k < Size; k++)
 			{
-				if (Values[k] != tmp[k])
+				double currentValue = Math.Round(Values[k], 4);
+				double compareValue = Math.Round(tmp[k], 4);
+				if (currentValue.CompareTo(compareValue) != 0)
 					equal = false;
 			}
 
