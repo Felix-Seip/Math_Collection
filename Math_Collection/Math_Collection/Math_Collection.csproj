@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="RuntimeFunctionParser">
+      <HintPath>..\..\..\Runtime_Compiled_Function_Parser\RuntimeFunctionParser\RuntimeFunctionParser\bin\Release\RuntimeFunctionParser.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
