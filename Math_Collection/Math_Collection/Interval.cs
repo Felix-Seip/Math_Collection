@@ -17,6 +17,14 @@ namespace Math_Collection.Basics
         /// </summary>
         public Enums.eIntervalFeature feature { get; private set; }
 
+		public double Range
+		{
+			get
+			{
+				return MaxValue - MinValue;
+			}
+		}
+
 
         public Interval(double a, double b, Enums.eIntervalFeature f = Enums.eIntervalFeature.eClosed)
         {

@@ -76,5 +76,21 @@
             eMaximum
         }
 
+		public enum ECompareResult
+		{
+			/// <summary>
+			/// Represents the compare result for two same objects
+			/// </summary>
+			eSame,
+			/// <summary>
+			/// Represents the compare result for bigger object
+			/// </summary>
+			eBigger,
+			/// <summary>
+			/// Represents the compare result for smaller object
+			/// </summary>
+			eSmaller
+		}
+
     }
 }

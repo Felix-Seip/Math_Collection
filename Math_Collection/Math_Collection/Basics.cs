@@ -10,6 +10,19 @@ namespace Math_Collection.Basics
 {
     public class Basics
     {
+		public static Enums.ECompareResult Compare(double objA, double objB)
+		{
+			Enums.ECompareResult result = Enums.ECompareResult.eSame;
+
+			if (objA.CompareTo(objB) > 0)
+				result = Enums.ECompareResult.eBigger;
+			else if (objA.CompareTo(objB) < 0)
+				result = Enums.ECompareResult.eSmaller;
+
+			return result;
+		}
+
+
         public static double DegreesToRadians(double degrees)
         {
             return (degrees / 180) * Math.PI;
