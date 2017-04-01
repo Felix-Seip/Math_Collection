@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Math_Collection.LinearAlgebra.Matrices;
 using Math_Collection.LinearAlgebra.Vectors;
 using Math_Collection.LGS;
+using Math_Collection;
 
 namespace Math_Collection_UnitTest
 {
@@ -16,7 +17,7 @@ namespace Math_Collection_UnitTest
 			Vector v = new Vector(new double[4] { 0,1,3, -1});
 
 			LGS lgs = new LGS(m,v);
-			Vector result = lgs.Solve(LGS.ESolveAlgorithm.eGauß);
+			Vector result = lgs.Solve(Enums.ESolveAlgorithm.eGauß);
 
 			Vector expected = new Vector(new double[6] { 1,-2,3,4,2,-1});
 
