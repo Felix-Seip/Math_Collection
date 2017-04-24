@@ -390,7 +390,31 @@ namespace Math_Collection.LinearAlgebra
             }
             return inputMatrix;
         }
+        
+        public static Vector CalculateCrossProduct(Vector v1, Vector v2)
+        {
+            if(v1.Size != v2.Size)
+            {
+                throw new Exception("The given vectors don't have the same length");
+            }
 
-
+            double[] normalVectorValues = new double[v1.Size];
+            for(int i = 1; i < v1.Size + 1; i++)
+            {
+                if (i == v1.Size)
+                {
+                    normalVectorValues[i - 1] = (v1[0] * v2[1]) - (v1[1] * v2[0]);
+                }
+                else if(i == v1.Size - 1)
+                {
+                    normalVectorValues[i - 1] = (v1[i] * v2[0]) - (v1[0] * v2[i]);
+                }
+                else
+                {
+                    normalVectorValues[i - 1] = (v1[i] * v2[i + 1]) - (v1[i + 1] * v2[i]);
+                }
+            }
+            return new Vector(normalVectorValues);
+        }
     }
 }

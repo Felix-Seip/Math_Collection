@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Math_Collection;
 using Math_Collection.LinearAlgebra.Matrices;
 using Math_Collection.LinearAlgebra;
+using Math_Collection.LinearAlgebra.Vectors;
 
 namespace Math_Collection_UnitTest
 {
@@ -31,7 +32,16 @@ namespace Math_Collection_UnitTest
             //int i = 0;
 
         }
+        
+        [TestMethod]
+        public void CrossProductTest()
+        {
+            double[] v1Values = new double[] { 1, 2, 3 };
+            double[] v2Values = new double[] { 4, 5, 6 };
 
+            Vector normal = LinearAlgebraOperations.CalculateCrossProduct(new Vector(v1Values), new Vector(v2Values));
 
+            Assert.AreEqual(new Vector(new double[] { -3, 6, -3 }), normal);
+        }
     }
 }
