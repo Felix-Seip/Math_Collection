@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Math_Collection</RootNamespace>
     <AssemblyName>Math_Collection</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -31,8 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="RuntimeFunctionParser">
-      <HintPath>..\..\..\..\Runtime_Compiled_Function_Parser\Runtime_Compiled_Function_Parser\RuntimeFunctionParser\RuntimeFunctionParser\bin\Debug\RuntimeFunctionParser.dll</HintPath>
+    <Reference Include="RuntimeFunctionParser, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RuntimeFunctionParser.0.0.8\lib\RuntimeFunctionParser.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -52,7 +53,6 @@
     <Compile Include="LGS.cs" />
     <Compile Include="Linear Algebra\LinearAlgebraOperations.cs" />
     <Compile Include="Linear Algebra\Matrices\Matrix.cs" />
-    <Compile Include="Polynominal.cs" />
     <Compile Include="Linear Algebra\Matrices\ProjectionsMatrix.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Linear Algebra\Matrices\RotationsMatrix.cs" />
@@ -60,7 +60,9 @@
     <Compile Include="Linear Algebra\Vector.cs" />
     <Compile Include="Statistic\LinearRegression.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
