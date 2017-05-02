@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Analysis = Math_Collection.Analysis.AnalysisBase;
 using Math_Collection.LinearAlgebra.Vectors;
 using Math_Collection;
+using RuntimeFunctionParser;
 
 namespace Math_Collection_UnitTest
 {
@@ -59,11 +60,12 @@ namespace Math_Collection_UnitTest
         public void ExtremaApproximationWithFibonacciMethod_Test()
         {
             string function = "(x-2)*(x-2)+1";
+			Function f = new Parser().ParseFunction(function);
             int n = 4;
             Math_Collection.Basics.Interval intervall = new Math_Collection.Basics.Interval(0, 4);
 			// TODO: Epsilon umgebung mit (min-max) / Nn, damit Test nicht fehlschlägt
             Vector expected = new Vector(new double[] { 2, 1 });
-            Vector actual = Analysis.ExtremaApproximatedWithFibonacciMethod(function, intervall, n, Enums.EExtrema.eMinimum);
+            Vector actual = Analysis.ExtremaApproximatedWithFibonacciMethod(f, intervall, n, Enums.EExtrema.eMinimum);
             Assert.AreEqual(expected, actual);
         }
     }

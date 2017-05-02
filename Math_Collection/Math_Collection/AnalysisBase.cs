@@ -39,10 +39,8 @@ namespace Math_Collection.Analysis
 		/// <param name="n">Number of iterations</param>
 		/// <param name="extremaToFind">Minimum or Maximum</param>
 		/// <returns>A Vector with the x and y value of the founded point</returns>
-		public static Vector ExtremaApproximatedWithFibonacciMethod(string function, Interval intervall, int n, Enums.EExtrema extremaToFind)
+		public static Vector ExtremaApproximatedWithFibonacciMethod(Function function, Interval intervall, int n, Enums.EExtrema extremaToFind)
 		{
-			Parser parser = new RuntimeFunctionParser.Parser();
-			Function f = parser.ParseFunction(function);
 			// n can only begin with 2 or higher
 			if (n < 2)
 				n = 2;
@@ -55,14 +53,14 @@ namespace Math_Collection.Analysis
 			double functionValueForCurrentNumber = 0;
 			for (int i = 0; i < n; i++)
 			{
-				functionValueForCurrentNumber = f.Solve(currentNumber * intervalStep + intervall.MinValue, 0);
+				functionValueForCurrentNumber = function.Solve(currentNumber * intervalStep + intervall.MinValue, 0);
 
 				int numberForSymmetricPoint = obereGrenze - (currentNumber - untereGrenze);
 				// check for same x values
 				if (numberForSymmetricPoint == currentNumber)
 					break;
 
-				double functionValueForSymmetricPoint = f.Solve(numberForSymmetricPoint * intervalStep + intervall.MinValue, 0);
+				double functionValueForSymmetricPoint = function.Solve(numberForSymmetricPoint * intervalStep + intervall.MinValue, 0);
 
 				Enums.ECompareResult compareResultCurrentWithSymmetricFunctionValue = Basics.Basics.Compare(functionValueForSymmetricPoint, functionValueForCurrentNumber);
 
@@ -115,12 +113,12 @@ namespace Math_Collection.Analysis
 			}
 
 			double x = currentNumber * intervalStep + intervall.MinValue;
-			double y = f.Solve(x, 0);
+			double y = function.Solve(x, 0);
 
 			// Check lower limit
 			if (currentNumber == 1)
 			{
-				double lowestLimitFunctionValue = f.Solve(0 * intervalStep + intervall.MinValue, 0);
+				double lowestLimitFunctionValue = function.Solve(0 * intervalStep + intervall.MinValue, 0);
 				if (y.CompareTo(lowestLimitFunctionValue) > 0 && extremaToFind == Enums.EExtrema.eMinimum)
 				{
 					y = lowestLimitFunctionValue;
@@ -131,7 +129,7 @@ namespace Math_Collection.Analysis
 			// check highest limit
 			if (currentNumber == intervalPartsCount - 1)
 			{
-				double highestLimitFunctionValue = f.Solve(intervalPartsCount * intervalStep + intervall.MinValue, 0);
+				double highestLimitFunctionValue = function.Solve(intervalPartsCount * intervalStep + intervall.MinValue, 0);
 				if (y.CompareTo(highestLimitFunctionValue) < 0 && extremaToFind == Enums.EExtrema.eMaximum)
 				{
 					y = highestLimitFunctionValue;

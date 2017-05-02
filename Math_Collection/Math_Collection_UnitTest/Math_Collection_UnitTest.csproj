@@ -35,8 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="RuntimeFunctionParser">
-      <HintPath>..\..\..\Runtime_Compiled_Function_Parser\RuntimeFunctionParser\RuntimeFunctionParser\bin\Release\RuntimeFunctionParser.dll</HintPath>
+    <Reference Include="RuntimeFunctionParser, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RuntimeFunctionParser.0.0.8\lib\RuntimeFunctionParser.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
@@ -66,6 +67,9 @@
       <Project>{9f7bcfe6-d502-4a3b-8f08-56a909b1886f}</Project>
       <Name>Math_Collection</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
