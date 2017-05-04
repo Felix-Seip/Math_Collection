@@ -4,6 +4,7 @@ using System.Drawing;
 using System;
 using Math_Collection.LinearAlgebra.Vectors;
 using RuntimeFunctionParser;
+using Math_Collection.LinearAlgebra;
 
 namespace Math_Collection.Statistic
 {
@@ -13,7 +14,7 @@ namespace Math_Collection.Statistic
         {
             Parser parser = new Parser();
 
-            LGS.LGS lgs = new LGS.LGS(regressionMatrix, regressionVector);
+            LGS lgs = new LGS(regressionMatrix, regressionVector);
             string function = CreateRegressionFunction(lgs.Solve(Enums.ESolveAlgorithm.eGauß), numberOfVariables);
             return parser.ParseFunction(function);
         }

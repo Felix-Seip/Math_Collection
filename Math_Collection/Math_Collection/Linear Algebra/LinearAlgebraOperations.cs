@@ -225,11 +225,7 @@ namespace Math_Collection.LinearAlgebra
             }
             return matrix;
         }
-
 		
-
-      
-
         /// <summary>
         /// Changes a whole Column of a Matrix with the Vector Values
         /// Uses for Cramersche Regel

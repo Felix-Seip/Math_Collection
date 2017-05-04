@@ -1,9 +1,8 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Math_Collection.LinearAlgebra.Matrices;
 using Math_Collection.LinearAlgebra.Vectors;
-using Math_Collection.LGS;
 using Math_Collection;
+using Math_Collection.LinearAlgebra;
 
 namespace Math_Collection_UnitTest
 {

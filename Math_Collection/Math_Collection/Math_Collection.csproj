@@ -46,11 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnalysisBase.cs" />
-    <Compile Include="Basics.cs" />
+    <Compile Include="Analysis\AnalysisBase.cs" />
+    <Compile Include="Basics\Basics.cs" />
     <Compile Include="Enums.cs" />
-    <Compile Include="Interval.cs" />
-    <Compile Include="LGS.cs" />
+    <Compile Include="Basics\Interval.cs" />
+    <Compile Include="Linear Algebra\LGS.cs" />
     <Compile Include="Linear Algebra\LinearAlgebraOperations.cs" />
     <Compile Include="Linear Algebra\Matrices\Matrix.cs" />
     <Compile Include="Linear Algebra\Matrices\ProjectionsMatrix.cs" />
