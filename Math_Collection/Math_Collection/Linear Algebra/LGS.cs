@@ -2,7 +2,7 @@
 using Math_Collection.LinearAlgebra.Vectors;
 using static Math_Collection.Enums;
 
-namespace Math_Collection.LGS
+namespace Math_Collection.LinearAlgebra
 {
 	public class LGS
 	{

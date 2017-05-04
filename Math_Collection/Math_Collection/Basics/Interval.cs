@@ -12,7 +12,7 @@ namespace Math_Collection.Basics
 		{
 			get
 			{
-				if (Feature == Enums.eIntervalFeature.eOpen || Feature == Enums.eIntervalFeature.eLeftOpenRightClosed)
+				if (Feature == Enums.EIntervalFeature.eOpen || Feature == Enums.EIntervalFeature.eLeftOpenRightClosed)
 					return _minValue + Step;
 
 				return _minValue;
@@ -31,7 +31,7 @@ namespace Math_Collection.Basics
 		{
 			get
 			{
-				if (Feature == Enums.eIntervalFeature.eOpen || Feature == Enums.eIntervalFeature.eLeftClosedRightOpen)
+				if (Feature == Enums.EIntervalFeature.eOpen || Feature == Enums.EIntervalFeature.eLeftClosedRightOpen)
 					return _maxValue - Step;
 
 				return _maxValue;
@@ -50,7 +50,7 @@ namespace Math_Collection.Basics
 		/// <summary>
 		/// Represents the option of the intervall
 		/// </summary>
-		public Enums.eIntervalFeature Feature { get; private set; }
+		public Enums.EIntervalFeature Feature { get; private set; }
 
 		public double Range
 		{
@@ -60,13 +60,13 @@ namespace Math_Collection.Basics
 			}
 		}
 
-		public Interval() : this(0.0, 0.0, 1.0, Enums.eIntervalFeature.eClosed)
+		public Interval() : this(0.0, 0.0, 1.0, Enums.EIntervalFeature.eClosed)
 		{ }
 
-		public Interval(double min, double max, Enums.eIntervalFeature f = Enums.eIntervalFeature.eClosed) : this(min, max, 1.0, f)
+		public Interval(double min, double max, Enums.EIntervalFeature f = Enums.EIntervalFeature.eClosed) : this(min, max, 1.0, f)
 		{ }
 
-		public Interval(double min, double max, double step, Enums.eIntervalFeature feature = Enums.eIntervalFeature.eClosed)
+		public Interval(double min, double max, double step, Enums.EIntervalFeature feature = Enums.EIntervalFeature.eClosed)
 		{
 			MinValue = Math.Min(min, max);
 			MaxValue = Math.Max(min, max);

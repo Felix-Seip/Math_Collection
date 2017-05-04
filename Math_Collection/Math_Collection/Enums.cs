@@ -2,7 +2,7 @@
 {
     public class Enums
     {
-        public enum eIntervalFeature
+        public enum EIntervalFeature
         {
             /// <summary>
             /// { x | a < x < b }
