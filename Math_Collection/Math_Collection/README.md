@@ -26,7 +26,7 @@ This project contains all implemented classes and calculations.
         + TranslationsMatrix
 
 * Statistic
-    - Linearregressions  
+    - Polynominal Regression  
 
 
 ### Feature Overview
@@ -56,3 +56,4 @@ This project contains all implemented classes and calculations.
 | MultiplyValueToMatrixRowValues | LinearAlgebraOperations | Y | Multiplies a value to every element in a row | Matrix |
 | DivideValueByMatrixRowValues | LinearAlgebraOperations | Y | Divides a value to every element in a row | Matrix |
 | CalculateDeterminant | LinearAlgebraOperations | Y | Calculates the determinant of a matrix | double |
+| CreateRegression | PolynominalRegression | Y | Calculates a regression polynominal with a given degree | Function |
