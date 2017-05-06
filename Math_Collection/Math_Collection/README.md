@@ -38,22 +38,17 @@ This project contains all implemented classes and calculations.
 | Compare | Basics | Y | Compares two objects to each other | ECompareResult |
 | DegreesToRadians | Basics | Y | Transforms degree values into radian values | double |
 | FibonacciSequence | Basics | Y | Calculates the fibonacci sequence numbers | int |
-| FibonacciSequence | Basics | Y | Calculates the fibonacci sequence numbers | int |
 | Solve | LGS | N | Solves a system with linear equations | Vector |
 | AddVectorToVector | LinearAlgebraOperations | Y | Adds two vectors together | Vector |
 | SubtractVectorFromVector | LinearAlgebraOperations | Y | Subtracts two vectors | Vector |
 | MultiplyVectorWithVector | LinearAlgebraOperations | Y | Multiplies two vectors | Vector |
 | MultiplyVectorWithScalar | LinearAlgebraOperations | Y | Multiplies a vector with a scalar value | Vector |
-| DotProduct | LinearAlgebraOperations | Y | Calculates the dot product of two vectors | double |
+| CalculateDotProduct | LinearAlgebraOperations | Y | Calculates the dot product of two vectors | double |
 | CalculateCrossProduct | LinearAlgebraOperations | Y | Calculates the cross product of two vectors | Vector |
-| MultiplicationWithMatrix | LinearAlgebraOperations | Y | Multiplies two matrices together | Matrix |
+| MultiplyMatrixWithMatrix | LinearAlgebraOperations | Y | Multiplies two matrices together | Matrix |
 | MultiplyMatrixWithVector | LinearAlgebraOperations | Y | Multiplies a matrix with a vector | Vector |
 | MultiplyMatrixWithScalar | LinearAlgebraOperations | Y | Multiplies a matrix with a scalar value | Matrix |
-| RaiseTheMatrixToAPower | LinearAlgebraOperations | Y | Multiplies a matrix a bounch of time with itself | Matrix |
-| RaiseTheMatrixToAPower | LinearAlgebraOperations | Y | Multiplies a matrix a bounch of time with itself | Matrix |
-| AddValueToMatrixRowValues | LinearAlgebraOperations | Y | Adds a value to every element in a row | Matrix |
-| SubtractValueFromMatrixRowValues | LinearAlgebraOperations | Y | Subtracts a value to every element in a row | Matrix |
-| MultiplyValueToMatrixRowValues | LinearAlgebraOperations | Y | Multiplies a value to every element in a row | Matrix |
-| DivideValueByMatrixRowValues | LinearAlgebraOperations | Y | Divides a value to every element in a row | Matrix |
-| CalculateDeterminant | LinearAlgebraOperations | Y | Calculates the determinant of a matrix | double |
+| MultiplyMatrixWithItself | LinearAlgebraOperations | Y | Multiplies a matrix a bounch of time with itself | Matrix |
+| TransposeMatrix | LinearAlgebraOperations | Y | Creates the transposed version of the matrix | Matrix |
+| CalculateInverseMatrix | LinearAlgebraOperations | Y | Calculates the inverse matrix | Matrix |
 | CreateRegression | PolynominalRegression | Y | Calculates a regression polynominal with a given degree | Function |
