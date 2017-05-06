@@ -58,7 +58,7 @@
     <Compile Include="Linear Algebra\Matrices\RotationsMatrix.cs" />
     <Compile Include="Linear Algebra\Matrices\TranslationsMatrix.cs" />
     <Compile Include="Linear Algebra\Vector.cs" />
-    <Compile Include="Statistic\LinearRegression.cs" />
+    <Compile Include="Statistic\PolynominalRegression.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
