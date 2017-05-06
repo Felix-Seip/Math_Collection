@@ -9,6 +9,12 @@ namespace Math_Collection.LinearAlgebra
     /// </summary>
     public static class LinearAlgebraOperations
     {
+		/// <summary>
+		/// Adds two vectors together
+		/// </summary>
+		/// <param name="vector1">First summand</param>
+		/// <param name="vector2">Second summand</param>
+		/// <returns>The sum vector</returns>
         public static Vector AddVectorToVector(Vector vector1, Vector vector2)
         {
             double[] addedValues = new double[vector1.Size];
@@ -57,7 +63,7 @@ namespace Math_Collection.LinearAlgebra
         /// <summary>
         /// Returns the dot product of two vectors.
         /// </summary>
-        public static double DotProduct(Vector vector1, Vector vector2)
+        public static double CalculateDotProduct(Vector vector1, Vector vector2)
         {
             double dotProduct = 0;
             if (vector1.Size == vector2.Size)
@@ -70,10 +76,42 @@ namespace Math_Collection.LinearAlgebra
             return dotProduct;
         }
 
-        /// <summary>
-        /// Multiplies a Vector with a scalar
-        /// </summary>
-        public static Vector MultiplyVectorWithScalar(Vector vector, double scalar)
+		/// <summary>
+		/// Returns the cross product of two vectors
+		/// </summary>
+		/// <param name="v1"></param>
+		/// <param name="v2"></param>
+		/// <returns></returns>
+		public static Vector CalculateCrossProduct(Vector v1, Vector v2)
+		{
+			if (v1.Size != v2.Size)
+			{
+				throw new Exception("The given vectors don't have the same length");
+			}
+
+			double[] normalVectorValues = new double[v1.Size];
+			for (int i = 1; i < v1.Size + 1; i++)
+			{
+				if (i == v1.Size)
+				{
+					normalVectorValues[i - 1] = (v1[0] * v2[1]) - (v1[1] * v2[0]);
+				}
+				else if (i == v1.Size - 1)
+				{
+					normalVectorValues[i - 1] = (v1[i] * v2[0]) - (v1[0] * v2[i]);
+				}
+				else
+				{
+					normalVectorValues[i - 1] = (v1[i] * v2[i + 1]) - (v1[i + 1] * v2[i]);
+				}
+			}
+			return new Vector(normalVectorValues);
+		}
+
+		/// <summary>
+		/// Multiplies a Vector with a scalar
+		/// </summary>
+		public static Vector MultiplyVectorWithScalar(Vector vector, double scalar)
         {
             double[] multipliedValues = new double[vector.Size];
 
@@ -101,6 +139,7 @@ namespace Math_Collection.LinearAlgebra
             }
             return new Matrix(resultingMatrixValues);
         }
+
         /// <summary>
         /// Returns the product of a matrix and a vector.
         /// </summary>
@@ -125,7 +164,7 @@ namespace Math_Collection.LinearAlgebra
         /// <summary>
         /// Returns the product of two matrices.
         /// </summary>
-        public static Matrix MultiplicationWithMatrix(Matrix matrix1, Matrix matrix2)
+        public static Matrix MultiplyMatrixWithMatrix(Matrix matrix1, Matrix matrix2)
         {
             double[,] multipliedMatrix = new double[matrix1.RowCount, matrix1.ColumnCount];
 
@@ -152,19 +191,19 @@ namespace Math_Collection.LinearAlgebra
         /// <param name="m">Matrix that should be raised</param>
         /// <param name="pow">int value to which power the matrix should be taken</param>
         /// <returns>the raised Matrix</returns>
-        public static Matrix RaiseTheMatrixToAPower(Matrix m, int pow)
+        public static Matrix MultiplyMatrixWithItself(Matrix m, int pow)
         {
             for(int i = 0; i < pow; i++)
             {
-                m = MultiplicationWithMatrix(m, m);
+                m = MultiplyMatrixWithMatrix(m, m);
             }
             return m;
         }
 
-        /// <summary>
-        /// Adds a value to every element in a row
-        /// </summary>
-        public static Matrix AddValueToMatrixRowValues(Matrix matrix, double value, int rowIndex)
+		/// <summary>
+		/// Adds a value to every element in a row
+		/// </summary>
+		internal static Matrix AddValueToMatrixRowValues(Matrix matrix, double value, int rowIndex)
         {
             if (rowIndex > matrix.RowCount || rowIndex < 0)
                 throw new IndexOutOfRangeException();
@@ -176,10 +215,10 @@ namespace Math_Collection.LinearAlgebra
             return matrix;
         }
 
-        /// <summary>
-        /// Subtracts a value to every element in a row
-        /// </summary>
-        public static Matrix SubtractValueFromMatrixRowValues(Matrix matrix, double value, int rowIndex)
+		/// <summary>
+		/// Subtracts a value to every element in a row
+		/// </summary>
+		internal static Matrix SubtractValueFromMatrixRowValues(Matrix matrix, double value, int rowIndex)
         {
             if (rowIndex > matrix.RowCount || rowIndex < 0)
                 throw new IndexOutOfRangeException();
@@ -191,10 +230,10 @@ namespace Math_Collection.LinearAlgebra
             return matrix;
         }
 
-        /// <summary>
-        /// Multiplies a value to every element in a row
-        /// </summary>
-        public static Matrix MultiplyValueToMatrixRowValues(Matrix matrix, double value, int rowIndex)
+		/// <summary>
+		/// Multiplies a value to every element in a row
+		/// </summary>
+		internal static Matrix MultiplyValueToMatrixRowValues(Matrix matrix, double value, int rowIndex)
         {
             if (rowIndex > matrix.RowCount || rowIndex < 0)
                 throw new IndexOutOfRangeException();
@@ -211,7 +250,7 @@ namespace Math_Collection.LinearAlgebra
         /// <summary>
         /// Divides a value to every element in a row
         /// </summary>
-        public static Matrix DivideValueByMatrixRowValues(Matrix matrix, double value, int rowIndex)
+        internal static Matrix DivideValueByMatrixRowValues(Matrix matrix, double value, int rowIndex)
         {
             if (rowIndex > matrix.RowCount || rowIndex < 0)
                 throw new IndexOutOfRangeException();
@@ -234,7 +273,7 @@ namespace Math_Collection.LinearAlgebra
         /// <param name="changeWith">Vector that is set into to the matrix</param>
         /// <param name="columnIndex">column that changes</param>
         /// <returns>the changed Matrix or null if something fails</returns>
-        public static Matrix ChangeColumnInMatrix(Matrix sourceMatrix, Vector changeWith, int columnIndex)
+        internal static Matrix ChangeColumnInMatrix(Matrix sourceMatrix, Vector changeWith, int columnIndex)
 		{
 			if (sourceMatrix.ColumnCount != changeWith.Size)
 				return null;
@@ -272,7 +311,7 @@ namespace Math_Collection.LinearAlgebra
         /// <summary>
         /// Removes the specified row and column from a matrix.
         /// </summary>
-        public static Matrix RemoveRowsColumns(Matrix matrix, int row, int column)
+        private static Matrix RemoveRowsColumns(Matrix matrix, int row, int column)
         {
             double[,] newMatrix = new double[matrix.RowCount - 1, matrix.ColumnCount - 1];
 
@@ -294,7 +333,15 @@ namespace Math_Collection.LinearAlgebra
             return new Matrix(newMatrix);
         }
 
-        public static Matrix CopyUnderlyingMatrix(int row, int column, Matrix matrix)
+		/// <summary>
+		/// Copies a piece of a given matrix
+		/// Usesd for the calculation of determinant
+		/// </summary>
+		/// <param name="row">Rowindex which should not be copied</param>
+		/// <param name="column">Columnindex which should not be copied</param>
+		/// <param name="matrix">Input matrix</param>
+		/// <returns>The copied matrix</returns>
+        private static Matrix CopyUnderlyingMatrix(int row, int column, Matrix matrix)
         {
             double[,] newMatrix = new double[matrix.RowCount - 1, matrix.ColumnCount - 1];
             for (int i = 0, j = 0; i < matrix.RowCount; i++)
@@ -316,7 +363,12 @@ namespace Math_Collection.LinearAlgebra
             return new Matrix(newMatrix);
         }
 
-        public static double CalculateDeterminant(Matrix determinantMatrix)
+		/// <summary>
+		/// Calculates the determinant of a matrix
+		/// </summary>
+		/// <param name="determinantMatrix"></param>
+		/// <returns></returns>
+        internal static double CalculateDeterminant(Matrix determinantMatrix)
         {
             double determinant = 0;
 
@@ -340,7 +392,7 @@ namespace Math_Collection.LinearAlgebra
         /// <summary>
         /// Calculates the upper right and lower left pyramid matrix.
         /// </summary>
-        public static Matrix CalculateLowerLeftUpperRightPyramidMatrix(Matrix inputMatrix)
+        private static Matrix CalculateLowerLeftUpperRightPyramidMatrix(Matrix inputMatrix)
         {
             Matrix R = new Matrix(inputMatrix.Values);
 
@@ -360,6 +412,11 @@ namespace Math_Collection.LinearAlgebra
             return L;
         }
 
+		/// <summary>
+		/// Calculates the inverse matrix
+		/// </summary>
+		/// <param name="inputMatrix"></param>
+		/// <returns>The inverse Matrix</returns>
         public static Matrix CalculateInverseMatrix(Matrix inputMatrix)
         {
             for (int i = 0; i < inputMatrix.RowCount; i++)
@@ -385,32 +442,6 @@ namespace Math_Collection.LinearAlgebra
                 }
             }
             return inputMatrix;
-        }
-        
-        public static Vector CalculateCrossProduct(Vector v1, Vector v2)
-        {
-            if(v1.Size != v2.Size)
-            {
-                throw new Exception("The given vectors don't have the same length");
-            }
-
-            double[] normalVectorValues = new double[v1.Size];
-            for(int i = 1; i < v1.Size + 1; i++)
-            {
-                if (i == v1.Size)
-                {
-                    normalVectorValues[i - 1] = (v1[0] * v2[1]) - (v1[1] * v2[0]);
-                }
-                else if(i == v1.Size - 1)
-                {
-                    normalVectorValues[i - 1] = (v1[i] * v2[0]) - (v1[0] * v2[i]);
-                }
-                else
-                {
-                    normalVectorValues[i - 1] = (v1[i] * v2[i + 1]) - (v1[i + 1] * v2[i]);
-                }
-            }
-            return new Vector(normalVectorValues);
         }
     }
 }

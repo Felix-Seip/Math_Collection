@@ -35,7 +35,7 @@ namespace Math_Collection_Interface
         private void PotentiateMatrixButtonClicked(object sender, RoutedEventArgs e)
         {
             Math_Collection.LinearAlgebra.Matrices.Matrix matrix = CommonOperations.GetMatrixTextBoxValues(matrixValuesGrid, ComboBoxParser.MatrixComboBoxCount((string)matrixSizeComboBox.SelectedValue));
-            CommonOperations.SetMatrixResultTextBoxes(potentiatedMatrixValuesGrid, Math_Collection.LinearAlgebra.LinearAlgebraOperations.RaiseTheMatrixToAPower(matrix, matrixPower));
+            CommonOperations.SetMatrixResultTextBoxes(potentiatedMatrixValuesGrid, Math_Collection.LinearAlgebra.LinearAlgebraOperations.MultiplyMatrixWithItself(matrix, matrixPower));
         }
 
         private void MatrixDimensionsChanged(object sender, SelectionChangedEventArgs e)

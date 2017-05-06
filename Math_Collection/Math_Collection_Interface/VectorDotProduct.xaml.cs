@@ -68,7 +68,7 @@ namespace Math_Collection_Interface
                         secondVectorValues.Add(double.Parse(((TextBox)textBoxGrid.Children[i]).Text));
                 }
 
-                double result = LinearAlgebraOperations.DotProduct(new Math_Collection.LinearAlgebra.Vectors.Vector(firstVectorValues.ToArray()), new Math_Collection.LinearAlgebra.Vectors.Vector(secondVectorValues.ToArray()));
+                double result = LinearAlgebraOperations.CalculateDotProduct(new Math_Collection.LinearAlgebra.Vectors.Vector(firstVectorValues.ToArray()), new Math_Collection.LinearAlgebra.Vectors.Vector(secondVectorValues.ToArray()));
                 resultLabel.Content = "Result: " + result;
                 resultLabel.FontSize = 20;
             }
