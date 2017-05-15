@@ -147,15 +147,12 @@ namespace Math_Collection.Analysis
 		/// <returns></returns>
 		public static double CalulateApproximatedRoot(Function f, double startX, double epsilon = 0.001)
 		{
-			double currentRoot = double.MaxValue;
-			double nextRoot = double.MinValue;
+			double currentRoot = startX;
+			double nextRoot = double.MaxValue;
+
 			while(Math.Abs(currentRoot-nextRoot) > epsilon)
 			{
-				if (currentRoot == double.MaxValue)
-					currentRoot = startX;
-				else
-					currentRoot = nextRoot;
-
+				currentRoot = nextRoot == double.MaxValue ? startX : nextRoot;
 				double functionValue = f.Solve(currentRoot, 0);
 				double derivationValue = Derivation_Approximation(f, currentRoot, 0.0001);
 				nextRoot = currentRoot - (functionValue / derivationValue);
