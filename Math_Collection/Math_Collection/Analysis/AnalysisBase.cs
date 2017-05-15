@@ -15,22 +15,20 @@ namespace Math_Collection.Analysis
 		/// <param name="h"></param>
 		/// <param name="arimeticMiddle">use arimeticMiddle?</param>
 		/// <returns>the approximated value of the derivation or NaN if it fails</returns>
-		public static double Derivation_Approximation(double[] functionValues, int x, double h, bool arimeticMiddle = false)
+		public static double Derivation_Approximation(Function f, int x, double h, bool arimeticMiddle = false)
 		{
-			if (functionValues.Length < 3 || x < 1)
-				return double.NaN;
-
+			double fFromXPlusH = f.Solve(x + h, 0);
+			double fFromX = f.Solve(x, 0);
 			if (arimeticMiddle)
 			{
-				return Math.Round((functionValues[x + 1] - functionValues[x - 1]) / (2 * h), 4);
+				return Math.Round((fFromXPlusH - fFromX) / (2 * h), 4);
 			}
 			else
 			{
-				return Math.Round(((functionValues[x + 1] - functionValues[x]) / h), 4);
+				return Math.Round(((fFromXPlusH - fFromX) / h), 4);
 			}
 		}
-
-
+		
 		/// <summary>
 		/// Returns the minimum or maximum approximated point of a function with the fibonacci method
 		/// </summary>
