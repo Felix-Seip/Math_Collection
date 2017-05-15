@@ -15,7 +15,7 @@ namespace Math_Collection.Analysis
 		/// <param name="h"></param>
 		/// <param name="arimeticMiddle">use arimeticMiddle?</param>
 		/// <returns>the approximated value of the derivation or NaN if it fails</returns>
-		public static double Derivation_Approximation(Function f, int x, double h, bool arimeticMiddle = false)
+		public static double Derivation_Approximation(Function f, double x, double h, bool arimeticMiddle = false)
 		{
 			double fFromXPlusH = f.Solve(x + h, 0);
 			double fFromX = f.Solve(x, 0);
@@ -137,5 +137,31 @@ namespace Math_Collection.Analysis
 
 			return new Vector(new double[] { x, y });
 		}
+
+		/// <summary>
+		/// Calculates a approximated root from a function with the newton algorithm
+		/// </summary>
+		/// <param name="f">Function </param>
+		/// <param name="startX"></param>
+		/// <param name="epsilon">precision</param>
+		/// <returns></returns>
+		public static double CalulateApproximatedRoot(Function f, double startX, double epsilon = 0.001)
+		{
+			double currentRoot = double.MaxValue;
+			double nextRoot = double.MinValue;
+			while(Math.Abs(currentRoot-nextRoot) > epsilon)
+			{
+				if (currentRoot == double.MaxValue)
+					currentRoot = startX;
+				else
+					currentRoot = nextRoot;
+
+				double functionValue = f.Solve(currentRoot, 0);
+				double derivationValue = Derivation_Approximation(f, currentRoot, 0.0001);
+				nextRoot = currentRoot - (functionValue / derivationValue);
+			}
+			return currentRoot;
+		}
+
 	}
 }
