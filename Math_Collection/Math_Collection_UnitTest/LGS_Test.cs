@@ -49,7 +49,7 @@ namespace Math_Collection_UnitTest
 			});
 
 			LGS lgs = new LGS(inputMatrix, rightSideVector);
-			Vector actual = lgs.Solve(Enums.ESolveAlgorithm.eJacobi, 0, startValue, 0.0001);
+			Vector actual = lgs.Solve(Enums.ESolveAlgorithm.eJacobi, startValue, 0.0001);
 			actual.Round(3);
 
 			Vector expected = new Vector(new double[3]

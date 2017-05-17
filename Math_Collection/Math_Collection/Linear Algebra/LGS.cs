@@ -45,8 +45,8 @@ namespace Math_Collection.LinearAlgebra
 		/// <param name="startVectorForJacobiMethod">Start value for the Jacobi Algorithm</param>
 		/// <param name="epsilon">Precision that is used in the Jacobi Algorithm</param>
 		/// <returns></returns>
-		public Vector Solve(ESolveAlgorithm usedAlgorithm = ESolveAlgorithm.eAutomatic, int iterations = 50, 
-			Vector startVectorForJacobiMethod = null , double epsilon = 0.001)
+		public Vector Solve(ESolveAlgorithm usedAlgorithm = ESolveAlgorithm.eAutomatic,
+			Vector startVectorForJacobiMethod = null, double epsilon = 0.001)
 		{
 			if (!KoeffizientenMatrix.IsSqaureMatrix)
 				return null;
@@ -56,7 +56,7 @@ namespace Math_Collection.LinearAlgebra
 				switch (usedAlgorithm)
 				{
 					case ESolveAlgorithm.eApproximated:
-						return SolveLGSApproximated(iterations);
+						return SolveLGSApproximated(epsilon);
 					case ESolveAlgorithm.eDeterminant:
 						return SolveLGSDeterminant();
 					case ESolveAlgorithm.eGaussianElimination:
@@ -93,15 +93,17 @@ namespace Math_Collection.LinearAlgebra
 		/// <param name="expectedOutcome"></param>
 		/// <param name="iterations"></param>
 		/// <returns></returns>
-		private Vector SolveLGSApproximated(int iterations)
+		private Vector SolveLGSApproximated(double epsilon)
 		{
 			if (KoeffizientenMatrix == null || ExpansionVector == null)
 				return null;
 
+			Vector prevVector = null;
 			Vector solvedVector = new Vector(new double[ExpansionVector.Size]);
 
-			for (int p = 0; p < iterations; p++)
+			while (prevVector == null || Math.Abs(solvedVector.Magnitude - prevVector.Magnitude) > epsilon)
 			{
+				prevVector = solvedVector.Clone();
 				for (int i = 0; i < KoeffizientenMatrix.RowCount; i++)
 				{
 					double sigma = 0;
@@ -185,28 +187,23 @@ namespace Math_Collection.LinearAlgebra
 
 			Vector prevVector = null;
 			Vector resultVector = startValue.Clone();
-			while(prevVector == null || System.Math.Abs(resultVector.Magnitude-prevVector.Magnitude) > epsilon)
+			while (prevVector == null || System.Math.Abs(resultVector.Magnitude - prevVector.Magnitude) > epsilon)
 			{
 				prevVector = resultVector.Clone();
 				for (int i = 0; i < ExpansionVector.Size; i++)
 				{
 					double sigma = 0;
-					for(int j = 0; j < ExpansionVector.Size; j++)
+					for (int j = 0; j < ExpansionVector.Size; j++)
 					{
 						if (i == j)
 							continue;
 
 						sigma += KoeffizientenMatrix[i, j] * resultVector[j];
 					}
-					resultVector[i] = (1 / KoeffizientenMatrix[i, i]) * (ExpansionVector[i] - sigma); 
+					resultVector[i] = (1 / KoeffizientenMatrix[i, i]) * (ExpansionVector[i] - sigma);
 				}
 			}
 			return resultVector;
-		}
-
-		private double FindVariableValue(double vectorValue, double matrixValue)
-		{
-			return vectorValue / matrixValue;
 		}
 
 		private Vector ReversePlugIn(Matrix calcMatrix, Vector calcVector)
@@ -219,7 +216,7 @@ namespace Math_Collection.LinearAlgebra
 				{
 					if (calcMatrix[k, m] != 0 && k == calcMatrix.RowCount - 1)
 					{
-						parameter[k] = FindVariableValue(calcVector[k], calcMatrix[k, m]);
+						parameter[k] = calcVector[k] / calcMatrix[k, m];
 					}
 					else if (calcMatrix[k, m] != 0)
 					{
@@ -227,11 +224,10 @@ namespace Math_Collection.LinearAlgebra
 						{
 							if (parameter[i] != 0)
 							{
-								double bla = calcMatrix[k, i];
 								calcVector[k] -= calcMatrix[k, i] * parameter[i];
 							}
 						}
-						parameter[k] = FindVariableValue(calcVector[k], calcMatrix[k, m]);
+						parameter[k] = calcVector[k] / calcMatrix[k, m];
 						break;
 					}
 				}
@@ -302,35 +298,35 @@ namespace Math_Collection.LinearAlgebra
 			v[rowToSwitchWith] = tempVector;
 		}
 
-        public Vector GaussSeidel(Matrix matrix, Vector outcome)
-        {
-            https://www.felixseip.com/gauss-seidel
-            Vector expected = new Vector(new double[outcome.Size]);
+		public Vector GaussSeidel(Matrix matrix, Vector outcome)
+		{
+			https://www.felixseip.com/gauss-seidel
+			Vector expected = new Vector(new double[outcome.Size]);
 
-            double prevMagnitude = expected.Magnitude - 1;
-            while (prevMagnitude != expected.Magnitude)
-            {
-                prevMagnitude = expected.Magnitude;
-                for (int i = 0; i < outcome.Size; i++)
-                {
-                    double sigma = 0;
-                    for(int j = 0; j < outcome.Size; j++)
-                    {
-                        if(j != i)
-                        {
-                            sigma = sigma + (matrix[i, j] * expected[j]);
-                        }
-                    }
-                    expected[i] = (1 / matrix[i, i]) * (outcome[i] - sigma);
-                }
-            }
+			double prevMagnitude = expected.Magnitude - 1;
+			while (prevMagnitude != expected.Magnitude)
+			{
+				prevMagnitude = expected.Magnitude;
+				for (int i = 0; i < outcome.Size; i++)
+				{
+					double sigma = 0;
+					for (int j = 0; j < outcome.Size; j++)
+					{
+						if (j != i)
+						{
+							sigma = sigma + (matrix[i, j] * expected[j]);
+						}
+					}
+					expected[i] = (1 / matrix[i, i]) * (outcome[i] - sigma);
+				}
+			}
 
-            for(int i = 0; i < expected.Size; i++)
-            {
-                expected[i] = Math.Round(expected[i], 3);
-            }
+			for (int i = 0; i < expected.Size; i++)
+			{
+				expected[i] = Math.Round(expected[i], 3);
+			}
 
-            return expected;
-        }
+			return expected;
+		}
 	}
 }
