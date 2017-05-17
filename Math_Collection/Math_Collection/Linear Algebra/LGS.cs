@@ -63,6 +63,8 @@ namespace Math_Collection.LinearAlgebra
                         return SolveLGSGauß();
                     case ESolveAlgorithm.eJacobi:
                         return SolveLGSJacobi(startVectorForJacobiMethod, epsilon);
+                    case ESolveAlgorithm.eGaußSeidel:
+                        return GaussSeidel(startVectorForJacobiMethod, epsilon);
                     default:
                         return null;
                 }
@@ -206,6 +208,37 @@ namespace Math_Collection.LinearAlgebra
             return resultVector;
         }
 
+        /// <summary>
+		/// Calculates the result of an LGS with the Gauss Seidel Method
+		/// </summary>
+		/// <param name="inputMatrix">Values left of the unknowns as a matrix</param>
+		/// <param name="epsilon">The deviation tolerance for the results</param>
+		/// <returns></returns>
+        private Vector GaussSeidel(Vector startValue, double epsilon)
+        {
+            https://www.felixseip.com/gauss-seidel
+            Vector prevVector = null;
+            Vector resultVector = startValue.Clone();
+            while (prevVector == null || Math.Abs(resultVector.Magnitude - prevVector.Magnitude) > epsilon)
+            {
+                prevVector = resultVector.Clone();
+                for (int i = 0; i < ExpansionVector.Size; i++)
+                {
+                    double sigma = 0;
+                    for (int j = 0; j < ExpansionVector.Size; j++)
+                    {
+                        if (j != i)
+                        {
+                            sigma = sigma + (KoeffizientenMatrix[i, j] * resultVector[j]);
+                        }
+                    }
+                    resultVector[i] = (1 / KoeffizientenMatrix[i, i]) * (ExpansionVector[i] - sigma);
+                }
+            }
+            resultVector.Round(3);
+            return resultVector;
+        }
+
         private Vector ReversePlugIn(Matrix calcMatrix, Vector calcVector)
         {
             Vector parameter = new Vector(calcVector.Values);
@@ -296,37 +329,6 @@ namespace Math_Collection.LinearAlgebra
             double tempVector = v[rowToSwitch];
             v[rowToSwitch] = v[rowToSwitchWith];
             v[rowToSwitchWith] = tempVector;
-        }
-
-        /// <summary>
-		/// Calculates the result of an LGS with the Gauss Seidel Method
-		/// </summary>
-		/// <param name="inputMatrix">Values left of the unknowns as a matrix</param>
-		/// <param name="epsilon">The deviation tolerance for the results</param>
-		/// <returns></returns>
-        private Vector GaussSeidel(Vector startValue, double epsilon)
-        {
-            https://www.felixseip.com/gauss-seidel
-            Vector prevVector = null;
-            Vector resultVector = startValue.Clone();
-            while (prevVector == null || Math.Abs(resultVector.Magnitude - prevVector.Magnitude) > epsilon)
-            {
-                prevVector = resultVector.Clone();
-                for (int i = 0; i < ExpansionVector.Size; i++)
-                {
-                    double sigma = 0;
-                    for (int j = 0; j < ExpansionVector.Size; j++)
-                    {
-                        if (j != i)
-                        {
-                            sigma = sigma + (KoeffizientenMatrix[i, j] * resultVector[j]);
-                        }
-                    }
-                    resultVector[i] = (1 / KoeffizientenMatrix[i, i]) * (ExpansionVector[i] - sigma);
-                }
-            }
-            resultVector.Round(3);
-            return resultVector;
         }
     }
 }
