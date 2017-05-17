@@ -44,6 +44,11 @@ namespace Math_Collection.LinearAlgebra.Vectors
 			}
 		}
 
+		public Vector()
+		{
+			Values = new double[0];
+		}
+
 		public Vector(double[] values)
 		{
 			Values = (double[])values.Clone();
@@ -102,6 +107,31 @@ namespace Math_Collection.LinearAlgebra.Vectors
 			}
 
 			return equal;
+		}
+
+		/// <summary>
+		/// Clones a Vector object
+		/// </summary>
+		/// <returns></returns>
+		public Vector Clone()
+		{
+			double[] newValues = Values.Clone() as double[];
+			if (newValues == null)
+				return null;
+
+			return new Vector(newValues);
+		}
+
+		/// <summary>
+		/// Rounds every value of the vector
+		/// </summary>
+		/// <param name="decimals">decimal places</param>
+		public void Round(int decimals)
+		{
+			for(int i = 0; i< Size; i++)
+			{
+				Values[i] = Math.Round(Values[i], decimals);
+			}
 		}
 	}
 }

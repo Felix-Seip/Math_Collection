@@ -21,7 +21,7 @@ namespace Math_Collection.Statistic
 			Parser parser = new Parser();
 
 			LGS lgs = new LGS(regressionMatrix, regressionVector);
-			string function = CreateRegressionFunction(lgs.Solve(Enums.ESolveAlgorithm.eGauß), degreeOfPolynominal + 1);
+			string function = CreateRegressionFunction(lgs.Solve(Enums.ESolveAlgorithm.eGaussianElimination), degreeOfPolynominal + 1);
 			return parser.ParseFunction(function);
 		}
 

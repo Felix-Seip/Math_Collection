@@ -28,14 +28,24 @@ namespace Math_Collection.LinearAlgebra
 			set { _expansionVector = value; }
 		}
 
-		public LGS(Matrix input,Vector outcome)
+		public LGS(Matrix input, Vector outcome)
 		{
 			KoeffizientenMatrix = input;
 			ExpansionVector = outcome;
 			ResultType = ELGSType.eNotSolved;
 		}
 
-		public Vector Solve(ESolveAlgorithm usedAlgorithm = ESolveAlgorithm.eAutomatic)
+		/// <summary>
+		/// Solves the LGS 
+		/// </summary>
+		/// <param name="usedAlgorithm">Algorithm that should be used
+		/// With the Automatic option a algorithm is automaticallly picked</param>
+		/// <param name="iterations">Optional Parameter and is used for the Approximated Algorithm</param>
+		/// <param name="startVectorForJacobiMethod">Start value for the Jacobi Algorithm</param>
+		/// <param name="epsilon">Precision that is used in the Jacobi Algorithm</param>
+		/// <returns></returns>
+		public Vector Solve(ESolveAlgorithm usedAlgorithm = ESolveAlgorithm.eAutomatic, int iterations = 50, 
+			Vector startVectorForJacobiMethod = null , double epsilon = 0.001)
 		{
 			if (!KoeffizientenMatrix.IsSqaureMatrix)
 				return null;
@@ -45,13 +55,15 @@ namespace Math_Collection.LinearAlgebra
 				switch (usedAlgorithm)
 				{
 					case ESolveAlgorithm.eApproximated:
-					return SolveLGSApproximated(50);
+						return SolveLGSApproximated(iterations);
 					case ESolveAlgorithm.eDeterminant:
-					return SolveLGSDeterminant();
-					case ESolveAlgorithm.eGauß:
-					return SolveLGSGauß();
+						return SolveLGSDeterminant();
+					case ESolveAlgorithm.eGaussianElimination:
+						return SolveLGSGauß();
+					case ESolveAlgorithm.eJacobi:
+						return SolveLGSJacobi(startVectorForJacobiMethod, epsilon);
 					default:
-					return null;
+						return null;
 				}
 			}
 
@@ -95,9 +107,9 @@ namespace Math_Collection.LinearAlgebra
 					for (int j = 0; j < KoeffizientenMatrix.ColumnCount; j++)
 					{
 						if (j != i)
-							sigma += KoeffizientenMatrix[i,j] * solvedVector[j];
+							sigma += KoeffizientenMatrix[i, j] * solvedVector[j];
 					}
-					solvedVector.Values[i] = (ExpansionVector[i] - sigma) / KoeffizientenMatrix[i,i];
+					solvedVector.Values[i] = (ExpansionVector[i] - sigma) / KoeffizientenMatrix[i, i];
 				}
 			}
 			ResultType = ELGSType.eUnique;
@@ -126,7 +138,7 @@ namespace Math_Collection.LinearAlgebra
 
 			for (int i = 0; i < KoeffizientenMatrix.ColumnCount; i++)
 			{
-				Matrix xi = LinearAlgebra.LinearAlgebraOperations.ChangeColumnInMatrix(KoeffizientenMatrix,ExpansionVector,i);
+				Matrix xi = LinearAlgebra.LinearAlgebraOperations.ChangeColumnInMatrix(KoeffizientenMatrix, ExpansionVector, i);
 				result[i] = xi.Determinant / inputDeterminante;
 			}
 
@@ -148,51 +160,83 @@ namespace Math_Collection.LinearAlgebra
 			for (int i = 0; i < calcMatrix.RowCount - 1; i++)
 			{
 				int actualRow = i;
-				int pivotRow = calcMatrix.NextPivotRow(i,i);
+				int pivotRow = calcMatrix.NextPivotRow(i, i);
 
 				if (actualRow != pivotRow)
-					SwitchRows(calcMatrix,calcVector,pivotRow,actualRow);
+					SwitchRows(calcMatrix, calcVector, pivotRow, actualRow);
 
-				EleminatePivotColumn(calcMatrix,calcVector,i,i);
+				EleminatePivotColumn(calcMatrix, calcVector, i, i);
 			}
 
 			return ReversePlugIn(calcMatrix, calcVector);
 		}
 
-        private double FindVariableValue(double vectorValue, double matrixValue)
-        {
-            return vectorValue / matrixValue;
-        }
+		private Vector SolveLGSJacobi(Vector startValue, double epsilon)
+		{
+			if (KoeffizientenMatrix == null || ExpansionVector == null)
+				return null;
 
-        private Vector ReversePlugIn(Matrix calcMatrix, Vector calcVector)
-        {
-            Vector parameter = new Vector(calcVector.Values);
-            parameter.FlushVectorValues();
-            for (int k = calcMatrix.RowCount - 1; k >= 0; k--)
-            {
-                for (int m = 0; m < calcMatrix.ColumnCount; m++)
-                {
-                    if (calcMatrix[k, m] != 0 && k == calcMatrix.RowCount - 1)
-                    {
-                        parameter[k] = FindVariableValue(calcVector[k], calcMatrix[k, m]);
-                    }
-                    else if(calcMatrix[k, m] != 0)
-                    {
-                        for(int i = 0; i < parameter.Size; i++)
-                        {
-                            if (parameter[i] != 0)
-                            {
-                                double bla = calcMatrix[k, i];
-                                calcVector[k] -= calcMatrix[k, i] * parameter[i];
-                            }
-                        }
-                        parameter[k] = FindVariableValue(calcVector[k], calcMatrix[k, m]);
-                        break;
-                    }
-                }
-            }
-            return parameter;
-        }
+			if (KoeffizientenMatrix.ColumnCount != ExpansionVector.Size)
+				return null;
+
+			if (KoeffizientenMatrix.ColumnCount != startValue.Size)
+				return null;
+
+			Vector prevVector = null;
+			Vector resultVector = startValue.Clone();
+			while(prevVector == null || System.Math.Abs(resultVector.Magnitude-prevVector.Magnitude) > epsilon)
+			{
+				prevVector = resultVector.Clone();
+				for (int i = 0; i < ExpansionVector.Size; i++)
+				{
+					double sigma = 0;
+					for(int j = 0; j < ExpansionVector.Size; j++)
+					{
+						if (i == j)
+							continue;
+
+						sigma += KoeffizientenMatrix[i, j] * resultVector[j];
+					}
+					resultVector[i] = (1 / KoeffizientenMatrix[i, i]) * (ExpansionVector[i] - sigma); 
+				}
+			}
+			return resultVector;
+		}
+
+		private double FindVariableValue(double vectorValue, double matrixValue)
+		{
+			return vectorValue / matrixValue;
+		}
+
+		private Vector ReversePlugIn(Matrix calcMatrix, Vector calcVector)
+		{
+			Vector parameter = new Vector(calcVector.Values);
+			parameter.FlushVectorValues();
+			for (int k = calcMatrix.RowCount - 1; k >= 0; k--)
+			{
+				for (int m = 0; m < calcMatrix.ColumnCount; m++)
+				{
+					if (calcMatrix[k, m] != 0 && k == calcMatrix.RowCount - 1)
+					{
+						parameter[k] = FindVariableValue(calcVector[k], calcMatrix[k, m]);
+					}
+					else if (calcMatrix[k, m] != 0)
+					{
+						for (int i = 0; i < parameter.Size; i++)
+						{
+							if (parameter[i] != 0)
+							{
+								double bla = calcMatrix[k, i];
+								calcVector[k] -= calcMatrix[k, i] * parameter[i];
+							}
+						}
+						parameter[k] = FindVariableValue(calcVector[k], calcMatrix[k, m]);
+						break;
+					}
+				}
+			}
+			return parameter;
+		}
 
 		/// <summary>
 		/// Turns every value in the column under the pivotRow to zero#
@@ -202,7 +246,7 @@ namespace Math_Collection.LinearAlgebra
 		/// <param name="pivotRow"></param>
 		/// <param name="pivotColumn"></param>
 		/// <returns></returns>
-		private void EleminatePivotColumn(Matrix mSource,Vector vSource,int pivotRow,int pivotColumn)
+		private void EleminatePivotColumn(Matrix mSource, Vector vSource, int pivotRow, int pivotColumn)
 		{
 			if (pivotRow < 0 || pivotRow > mSource.RowCount || pivotColumn < 0 || pivotColumn > mSource.ColumnCount)
 				return;
@@ -210,14 +254,14 @@ namespace Math_Collection.LinearAlgebra
 			// Elemination
 			for (int i = pivotRow + 1; i < mSource.RowCount; i++)
 			{
-				if (mSource[i,pivotColumn] == 0)
+				if (mSource[i, pivotColumn] == 0)
 					continue;
 
-				double lampda = -(mSource[i,pivotColumn] / mSource[pivotRow,pivotColumn]);
+				double lampda = -(mSource[i, pivotColumn] / mSource[pivotRow, pivotColumn]);
 				// Eliminate values of Matrix
 				for (int k = 0; k < mSource.ColumnCount; k++)
 				{
-					mSource[i,k] = mSource[pivotRow,k] * lampda + mSource[i,k];
+					mSource[i, k] = mSource[pivotRow, k] * lampda + mSource[i, k];
 				}
 				// Eleminate values of Vector
 				vSource[i] = vSource[pivotRow] * lampda + vSource[i];
@@ -231,7 +275,7 @@ namespace Math_Collection.LinearAlgebra
 		/// <param name="rowToSwitch">index of row that switch</param>
 		/// <param name="rowToSwitchWith">index of row to switch with</param>
 		/// <returns>Changed matrix or null if it fails</returns>
-		private void SwitchRows(Matrix input,Vector v,int rowToSwitch,int rowToSwitchWith)
+		private void SwitchRows(Matrix input, Vector v, int rowToSwitch, int rowToSwitchWith)
 		{
 			if (input == null)
 				return;
@@ -247,9 +291,9 @@ namespace Math_Collection.LinearAlgebra
 
 			for (int i = 0; i < input.ColumnCount; i++)
 			{
-				double tempMatrix = input[rowToSwitch,i];
-				input[rowToSwitch,i] = input[rowToSwitchWith,i];
-				input[rowToSwitchWith,i] = tempMatrix;
+				double tempMatrix = input[rowToSwitch, i];
+				input[rowToSwitch, i] = input[rowToSwitchWith, i];
+				input[rowToSwitchWith, i] = tempMatrix;
 			} // end of for
 
 			double tempVector = v[rowToSwitch];

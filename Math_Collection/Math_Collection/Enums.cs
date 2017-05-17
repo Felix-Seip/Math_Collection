@@ -61,7 +61,18 @@
             /// Solves the LGS with the Gauß Algorithm
             /// https://de.wikipedia.org/wiki/Gau%C3%9Fsches_Eliminationsverfahren
             /// </summary>
-            eGauß
+            eGaussianElimination,
+			/// <summary>
+			/// Solves the LGS with the Jacobi Algorithm (Iterativ method)
+			/// <seealso cref="Gesamtschrittverfahren"/>
+			/// </summary>
+			eJacobi,
+			/// <summary>
+			/// Solves the LGS with the Gauß-Seidel Algorithm
+			/// <seealso cref="Einzelschrittverfahren"/>
+			/// </summary>
+			eGaußSeidel
+			
         }
 
         public enum EExtrema
