@@ -45,8 +45,8 @@ namespace Math_Collection.LinearAlgebra
         /// <param name="startVectorForJacobiMethod">Start value for the Jacobi Algorithm</param>
         /// <param name="epsilon">Precision that is used in the Jacobi Algorithm</param>
         /// <returns></returns>
-        public Vector Solve(ESolveAlgorithm usedAlgorithm = ESolveAlgorithm.eAutomatic, int iterations = 50,
-            Vector startVectorForJacobiMethod = null, double epsilon = 0.001)
+        public Vector Solve(ESolveAlgorithm usedAlgorithm = ESolveAlgorithm.eAutomatic,
+            Vector startVectorForJacobiMethod = null, double epsilon = 0.0001)
         {
             if (!KoeffizientenMatrix.IsSqaureMatrix)
                 return null;
@@ -56,15 +56,13 @@ namespace Math_Collection.LinearAlgebra
                 switch (usedAlgorithm)
                 {
                     case ESolveAlgorithm.eApproximated:
-                        return SolveLGSApproximated(iterations);
+                        return SolveLGSApproximated(epsilon);
                     case ESolveAlgorithm.eDeterminant:
                         return SolveLGSDeterminant();
                     case ESolveAlgorithm.eGaussianElimination:
                         return SolveLGSGauß();
                     case ESolveAlgorithm.eJacobi:
                         return SolveLGSJacobi(startVectorForJacobiMethod, epsilon);
-                    case ESolveAlgorithm.eGaußSeidel:
-                        return GaussSeidel(startVectorForJacobiMethod, epsilon);
                     default:
                         return null;
                 }
@@ -89,21 +87,23 @@ namespace Math_Collection.LinearAlgebra
         }
 
         /// <summary>
-        /// Calculates a approximated result of an LGS with the JacobiMethod
-        /// </summary>
-        /// <param name="inputMatrix"></param>
-        /// <param name="expectedOutcome"></param>
-        /// <param name="iterations"></param>
-        /// <returns></returns>
-        private Vector SolveLGSApproximated(int iterations)
+		/// Calculates a approximated result of an LGS with the JacobiMethod
+		/// </summary>
+		/// <param name="inputMatrix"></param>
+		/// <param name="expectedOutcome"></param>
+		/// <param name="iterations"></param>
+		/// <returns></returns>
+		private Vector SolveLGSApproximated(double epsilon)
         {
             if (KoeffizientenMatrix == null || ExpansionVector == null)
                 return null;
 
+            Vector prevVector = null;
             Vector solvedVector = new Vector(new double[ExpansionVector.Size]);
 
-            for (int p = 0; p < iterations; p++)
+            while (prevVector == null || Math.Abs(solvedVector.Magnitude - prevVector.Magnitude) > epsilon)
             {
+                prevVector = solvedVector.Clone();
                 for (int i = 0; i < KoeffizientenMatrix.RowCount; i++)
                 {
                     double sigma = 0;
@@ -206,11 +206,6 @@ namespace Math_Collection.LinearAlgebra
             return resultVector;
         }
 
-        private double FindVariableValue(double vectorValue, double matrixValue)
-        {
-            return vectorValue / matrixValue;
-        }
-
         private Vector ReversePlugIn(Matrix calcMatrix, Vector calcVector)
         {
             Vector parameter = new Vector(calcVector.Values);
@@ -221,7 +216,7 @@ namespace Math_Collection.LinearAlgebra
                 {
                     if (calcMatrix[k, m] != 0 && k == calcMatrix.RowCount - 1)
                     {
-                        parameter[k] = FindVariableValue(calcVector[k], calcMatrix[k, m]);
+                        parameter[k] = calcVector[k] / calcMatrix[k, m];
                     }
                     else if (calcMatrix[k, m] != 0)
                     {
@@ -229,11 +224,10 @@ namespace Math_Collection.LinearAlgebra
                         {
                             if (parameter[i] != 0)
                             {
-                                double bla = calcMatrix[k, i];
                                 calcVector[k] -= calcMatrix[k, i] * parameter[i];
                             }
                         }
-                        parameter[k] = FindVariableValue(calcVector[k], calcMatrix[k, m]);
+                        parameter[k] = calcVector[k] / calcMatrix[k, m];
                         break;
                     }
                 }
