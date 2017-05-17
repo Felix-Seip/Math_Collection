@@ -1,5 +1,6 @@
 ﻿using Math_Collection.LinearAlgebra.Matrices;
 using Math_Collection.LinearAlgebra.Vectors;
+using System;
 using static Math_Collection.Enums;
 
 namespace Math_Collection.LinearAlgebra
@@ -301,6 +302,35 @@ namespace Math_Collection.LinearAlgebra
 			v[rowToSwitchWith] = tempVector;
 		}
 
+        public Vector GaussSeidel(Matrix matrix, Vector outcome)
+        {
+            https://www.felixseip.com/gauss-seidel
+            Vector expected = new Vector(new double[outcome.Size]);
 
+            double prevMagnitude = expected.Magnitude - 1;
+            while (prevMagnitude != expected.Magnitude)
+            {
+                prevMagnitude = expected.Magnitude;
+                for (int i = 0; i < outcome.Size; i++)
+                {
+                    double sigma = 0;
+                    for(int j = 0; j < outcome.Size; j++)
+                    {
+                        if(j != i)
+                        {
+                            sigma = sigma + (matrix[i, j] * expected[j]);
+                        }
+                    }
+                    expected[i] = (1 / matrix[i, i]) * (outcome[i] - sigma);
+                }
+            }
+
+            for(int i = 0; i < expected.Size; i++)
+            {
+                expected[i] = Math.Round(expected[i], 3);
+            }
+
+            return expected;
+        }
 	}
 }
