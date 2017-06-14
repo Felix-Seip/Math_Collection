@@ -60,7 +60,7 @@ namespace Math_Collection.LinearAlgebra
                     case ESolveAlgorithm.eDeterminant:
                         return SolveLGSDeterminant();
                     case ESolveAlgorithm.eGaussianElimination:
-                        return GaussSeidel(startVectorForJacobiMethod,epsilon);
+                        return SolveLGSGaußElimination();
                     case ESolveAlgorithm.eJacobi:
                         return SolveLGSJacobi(startVectorForJacobiMethod, epsilon);
                     case ESolveAlgorithm.eGaußSeidel:
@@ -79,7 +79,7 @@ namespace Math_Collection.LinearAlgebra
             }
             else
             {
-                result = GaussSeidel(startVectorForJacobiMethod,epsilon);
+                result = SolveLGSGaußElimination();
             }
 
             if (result == null)
@@ -222,20 +222,47 @@ namespace Math_Collection.LinearAlgebra
 			}
 			return resultVector;
 		}
-		
+
 		/// <summary>
-		/// Turns every value in the column under the pivotRow to zero#
-		/// Uses for Gauß Algorithm
+		/// Implements the gausschen elimination algorithm
+		/// solves a lgs exactly
 		/// </summary>
-		/// <param name="mSource"></param>
-		/// <param name="pivotRow"></param>
-		/// <param name="pivotColumn"></param>
-		/// <param name="inputMatrix">Values left of the unknowns as a matrix</param>
-		/// <param name="epsilon">The deviation tolerance for the results</param>
-		/// <returns></returns>
-        private Vector GaussSeidel(Vector startValue, double epsilon)
+		/// <returns>Result as a vector</returns>
+		private Vector SolveLGSGaußElimination()
+		{
+			if (KoeffizientenMatrix == null || ExpansionVector == null)
+				return null;
+
+			if (KoeffizientenMatrix.ColumnCount != ExpansionVector.Size)
+				return null;
+
+			Matrix calcMatrix = new Matrix(KoeffizientenMatrix.Values);
+			Vector calcVector = new Vector(ExpansionVector.Values);
+
+			// Elimination
+			for (int i = 0; i < calcMatrix.RowCount - 1; i++)
+			{
+				int actualRow = i;
+				int pivotRow = calcMatrix.NextPivotRow(i, i);
+
+				if (actualRow != pivotRow)
+					SwitchRows(calcMatrix, calcVector, pivotRow, actualRow);
+
+				EleminatePivotColumn(calcMatrix, calcVector, i, i);
+			}
+
+			return ReversePlugIn(calcMatrix, calcVector);
+		}
+
+		/// <summary>
+		/// Implments the gauß seidel algorithm / singel step algorithm
+		/// </summary>
+		/// <param name="startValue">Start value for the algorithm</param>
+		/// <param name="epsilon">Precision</param>
+		/// <returns>Result as a vector</returns>
+		/// <see cref="https://www.felixseip.com/gauss-seidel"/>
+		private Vector GaussSeidel(Vector startValue, double epsilon)
         {
-            https://www.felixseip.com/gauss-seidel
             Vector prevVector = null;
             Vector resultVector = startValue.Clone();
             while (prevVector == null || Math.Abs(resultVector.Magnitude - prevVector.Magnitude) > epsilon)
@@ -258,6 +285,13 @@ namespace Math_Collection.LinearAlgebra
             return resultVector;
         }
 
+		/// <summary>
+		/// Do the reverse of the gausschen elimination algorithm
+		/// in order to get the result
+		/// </summary>
+		/// <param name="calcMatrix"></param>
+		/// <param name="calcVector"></param>
+		/// <returns></returns>
         private Vector ReversePlugIn(Matrix calcMatrix, Vector calcVector)
         {
             Vector parameter = new Vector(calcVector.Values);
