@@ -74,12 +74,7 @@ namespace Math_Collection.LinearAlgebra.Vectors
 
 		public override string ToString()
 		{
-			string vectorAsString = "";
-
-			for (int i = 0; i < Values.Length; i++)
-				vectorAsString += "|" + Values[i] + "|\n";
-
-			return vectorAsString;
+			return ""+Magnitude;
 		}
 
         public void FlushVectorValues()

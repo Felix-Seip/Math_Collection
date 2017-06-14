@@ -62,7 +62,7 @@ namespace Math_Collection.LinearAlgebra
 					case ESolveAlgorithm.eGaussianElimination:
 						return SolveLGSGauß();
 					case ESolveAlgorithm.eJacobi:
-						return SolveLGSJacobi(startVectorForJacobiMethod, epsilon);
+						//return SolveLGSJacobi(startVectorForJacobiMethod, epsilon);
 					default:
 						return null;
 				}
@@ -174,8 +174,10 @@ namespace Math_Collection.LinearAlgebra
 			return ReversePlugIn(calcMatrix, calcVector);
 		}
 
-		private Vector SolveLGSJacobi(Vector startValue, double epsilon)
+		public Vector SolveLGSJacobi(Vector startValue, int iterations, out string info)
 		{
+			info = "Iteration; CurrentResult; Diff" + Environment.NewLine;
+
 			if (KoeffizientenMatrix == null || ExpansionVector == null)
 				return null;
 
@@ -187,9 +189,16 @@ namespace Math_Collection.LinearAlgebra
 
 			Vector prevVector = null;
 			Vector resultVector = startValue.Clone();
-			while (prevVector == null || System.Math.Abs(resultVector.Magnitude - prevVector.Magnitude) > epsilon)
+			for (int n = 0; n < iterations; n++)
 			{
+				if (prevVector != null)
+				{
+					double diff = Math.Abs(resultVector.Magnitude - prevVector.Magnitude);
+					info += n + ";" + resultVector.ToString() + ";" + diff + Environment.NewLine;
+				}
+
 				prevVector = resultVector.Clone();
+
 				for (int i = 0; i < ExpansionVector.Size; i++)
 				{
 					double sigma = 0;
