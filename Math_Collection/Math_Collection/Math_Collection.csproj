@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="RuntimeFunctionParser, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RuntimeFunctionParser.0.0.8\lib\RuntimeFunctionParser.dll</HintPath>
+      <HintPath>..\packages\RuntimeFunctionParser.0.1.0\lib\RuntimeFunctionParser.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
