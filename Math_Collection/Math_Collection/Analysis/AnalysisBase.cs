@@ -13,13 +13,13 @@ namespace Math_Collection.Analysis
 		/// <param name="functionValues"></param>
 		/// <param name="x">x value of the function</param>
 		/// <param name="h"></param>
-		/// <param name="arimeticMiddle">use arimeticMiddle?</param>
+		/// <param name="arithmeticMiddle">use arimeticMiddle?</param>
 		/// <returns>the approximated value of the derivation or NaN if it fails</returns>
-		public static double Derivation_Approximation(Function f, double x, double h, bool arimeticMiddle = false)
+		public static double Derivation_Approximation(Function f, double x, double h, bool arithmeticMiddle = false)
 		{
 			double fFromXPlusH = f.Solve(x + h, 0);
 			double fFromX = f.Solve(x, 0);
-			if (arimeticMiddle)
+			if (arithmeticMiddle)
 			{
 				return Math.Round((fFromXPlusH - fFromX) / (2 * h), 4);
 			}
@@ -141,9 +141,10 @@ namespace Math_Collection.Analysis
         /// <summary>
 		/// Calculates a approximated root from a function with the newton algorithm
 		/// </summary>
-		/// <param name="f">Function </param>
-		/// <param name="startX"></param>
-		/// <param name="epsilon">precision</param>
+		/// <param name="targetFunction">Target function for which the extrema is found</param>
+		/// <param name="startPoint">Starting point for the algorithm</param>
+		/// <param name="interval">Interval for which the extrema should be found in</param>
+        /// <param name="epsilon">precision</param>
 		/// <returns></returns>
         public static Vector OptimizeUsingEdgeSearch(Function targetFunction, Vector startPoint, Interval interval, double epsilon = 0.0001)
         {
