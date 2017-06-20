@@ -138,6 +138,36 @@ namespace Math_Collection.Analysis
 			return new Vector(new double[] { x, y });
 		}
 
+        /// <summary>
+		/// Calculates a approximated root from a function with the newton algorithm
+		/// </summary>
+		/// <param name="f">Function </param>
+		/// <param name="startX"></param>
+		/// <param name="epsilon">precision</param>
+		/// <returns></returns>
+        public static Vector OptimizeUsingEdgeSearch(Function targetFunction, Vector startPoint, Interval interval, double epsilon = 0.0001)
+        {
+            Vector previousResult = new Vector(new double[] { 0, 0, 0});
+            bool alternate = true;
+            Function searchFunction;
+            while (Math.Abs(startPoint[0] - previousResult[0]) > epsilon && Math.Abs(startPoint[1] - previousResult[1]) > epsilon)
+            {
+                previousResult = startPoint;
+                if (alternate)
+                {
+                    searchFunction = targetFunction.UpdateFunction(targetFunction.OriginalFunction.Replace("y", startPoint[1] + ""));
+                    alternate = false;
+                }
+                else
+                {
+                    searchFunction = targetFunction.UpdateFunction(targetFunction.OriginalFunction.Replace("x", startPoint[0] + ""));
+                    alternate = true;
+                }
+                startPoint = ExtremaApproximatedWithFibonacciMethod(searchFunction, interval, 8, Enums.EExtrema.eMinimum);
+            }
+            return startPoint;
+        }
+
 		/// <summary>
 		/// Calculates a approximated root from a function with the newton algorithm
 		/// </summary>

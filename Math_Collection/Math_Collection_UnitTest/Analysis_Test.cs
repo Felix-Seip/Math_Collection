@@ -37,17 +37,27 @@ namespace Math_Collection_UnitTest
 		[TestMethod]
 		public void ExtremaApproximationWithFibonacciMethod_Test()
 		{
-			string function = "(x-2)*(x-2)+1";
+			string function = "x^2";
 			Function f = new Parser().ParseFunction(function);
-			int n = 4;
-			Math_Collection.Basics.Interval intervall = new Math_Collection.Basics.Interval(0, 4);
+			int n = 30;
+			Math_Collection.Basics.Interval intervall = new Math_Collection.Basics.Interval(-16, 16);
 			// TODO: Epsilon umgebung mit (min-max) / Nn, damit Test nicht fehlschlägt
 			Vector expected = new Vector(new double[] { 2, 1 });
 			Vector actual = Analysis.ExtremaApproximatedWithFibonacciMethod(f, intervall, n, Enums.EExtrema.eMinimum);
-			Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected, actual);
 		}
 
-		[TestMethod]
+        [TestMethod]
+        public void OptimizeUsingEdgeSearch_Test()
+        {
+            string function = "x^4+y^4";
+            Function f = new Parser().ParseFunction(function);
+            Math_Collection.Basics.Interval intervall = new Math_Collection.Basics.Interval(-4, 4);
+            Vector pointOfMinimum = Analysis.OptimizeUsingEdgeSearch(f, new Vector(new double[] { 1, 1, 1}), intervall);
+            bool bla = false;
+        }
+
+        [TestMethod]
 		public void ApproximatedRoot_Test()
 		{
 			string function = "x^2 - 2";
