@@ -8,14 +8,15 @@ namespace Math_Collection.Analysis
 {
     public class Gradient
     {
-        public Dictionary<string, Func<Function, double[], double, bool, double>> Functions;
+        public Dictionary<string, Derivative> Functions;
         private Function func;
+        private bool PartialDerivative = false;
 
-        public Func<Function, double[], double, bool, double> this[string variable]
+        public Derivative this[string variable]
         {
             get
             {
-                Func<Function, double[], double, bool, double> delegateFunc;
+                Derivative delegateFunc;
                 Functions.TryGetValue(variable, out delegateFunc);
                 return delegateFunc;
             }
@@ -23,22 +24,23 @@ namespace Math_Collection.Analysis
 
         public Gradient()
         {
-            Functions = new Dictionary<string, Func<Function, double[], double, bool, double>>();
+            Functions = new Dictionary<string, Derivative>();
         }
 
-        public Gradient(Function function)
+        public Gradient(Function function, bool partialDerivative)
         {
-            Functions = new Dictionary<string, Func<Function, double[], double, bool, double>>();
+            PartialDerivative = partialDerivative;
+            Functions = new Dictionary<string, Derivative>();
             func = function;
             for (int i = 0; i < 2; i++)
             {
                 if (i == 0)
                 {
-                    Functions.Add("x", PartialDerivative);
+                    Functions.Add("x", new Derivative(function, 0.00001));
                 }
                 else
                 {
-                    Functions.Add("y", PartialDerivative);
+                    Functions.Add("y", new Derivative(function, 0.00001));
                 }
             }
         }
@@ -48,7 +50,7 @@ namespace Math_Collection.Analysis
             Functions = v.Functions;
         }
 
-        public Vector Solve(double[] paramValues)
+        public Vector Solve(double x, double y)
         {
             if (Functions.Count > 2)
             {
@@ -57,37 +59,19 @@ namespace Math_Collection.Analysis
 
             Vector results = new Vector(new double[Functions.Count]); //Currently only goes until 2 functions
             int i = 0;
-            foreach (KeyValuePair<string, Func<Function, double[], double, bool, double>> value in Functions)
+            foreach (KeyValuePair<string, Derivative> value in Functions)
             {
                 if (i == 0)
                 {
-                    results[i] = value.Value.Invoke(func, paramValues, 0.00001, true);
+                    results[i] = value.Value.Solve(x, y, PartialDerivative, true);
                 }
                 else
                 {
-                    results[i] = value.Value.Invoke(func, paramValues, 0.00001, false);
+                    results[i] = value.Value.Solve(x, y, PartialDerivative, false);
                 }
                 i++;
             }
             return results;
-        }
-
-        private double PartialDerivative(Function f, double[] functionValues, double h, bool x)
-        {
-            double fFromXPlusH = f.Solve(functionValues[0] + h, functionValues[1]);
-            double fFromX = f.Solve(functionValues[0] - h, functionValues[1]);
-
-            double fFromYPlusH = f.Solve(functionValues[0], functionValues[1] + h);
-            double fFromY = f.Solve(functionValues[0], functionValues[1] - h);
-
-            if (x)
-            {
-                return Math.Round((fFromXPlusH - fFromX) / (2 * h), 4);
-            }
-            else
-            {
-                return Math.Round((fFromYPlusH - fFromY) / (2 * h), 4);
-            }
         }
     }
 }

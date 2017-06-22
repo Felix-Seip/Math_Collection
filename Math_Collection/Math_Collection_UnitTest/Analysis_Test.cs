@@ -55,12 +55,12 @@ namespace Math_Collection_UnitTest
         public void Gradient_Test()
         {
             Function func = new Parser().ParseFunction("x^2+y^2");
-            Gradient grad = new Gradient(func);
+            Gradient grad = new Gradient(func, true);
 
             double h = 0.00001;
 
             Vector expected = new Vector(new double[] { 10, 4});
-            Vector actual = grad.Solve(new double[] { 5, 2 });
+            Vector actual = grad.Solve(5, 2);
 
             for (int i = 0; i < actual.Size; i++)
             {
