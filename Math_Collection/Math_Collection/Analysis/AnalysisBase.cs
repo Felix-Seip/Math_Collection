@@ -28,16 +28,41 @@ namespace Math_Collection.Analysis
 				return Math.Round(((fFromXPlusH - fFromX) / h), 4);
 			}
 		}
-		
-		/// <summary>
-		/// Returns the minimum or maximum approximated point of a function with the fibonacci method
-		/// </summary>
-		/// <param name="function">Function for which the point should be found</param>
-		/// <param name="intervall">Interval in which the point should be</param>
-		/// <param name="n">Number of iterations</param>
-		/// <param name="extremaToFind">Minimum or Maximum</param>
-		/// <returns>A Vector with the x and y value of the founded point</returns>
-		public static Vector ExtremaApproximatedWithFibonacciMethod(Function function, Interval intervall, int n, Enums.EExtrema extremaToFind)
+
+        /// <summary>
+        /// Calculated the approximated derivation at a point with the h-method
+        /// </summary>
+        /// <param name="functionValues"></param>
+        /// <param name="x">x value of the function</param>
+        /// <param name="h"></param>
+        /// <param name="arithmeticMiddle">use arimeticMiddle?</param>
+        /// <returns>the approximated value of the derivation or NaN if it fails</returns>
+        public static double[] PartialDerivatives_Approximation(Function f, double[] functionValues, double h, bool arithmeticMiddle = false)
+        {
+            double fFromXPlusH = f.Solve(functionValues[0] + h, functionValues[1]);
+            double fFromX = f.Solve(functionValues[0] - h, functionValues[1]);
+
+            double fFromYPlusH = f.Solve(functionValues[0], functionValues[1] + h);
+            double fFromY = f.Solve(functionValues[0], functionValues[1] - h);
+            if (arithmeticMiddle)
+            {
+                return new double[] { Math.Round((fFromXPlusH - fFromX) / (2 * h), 4), Math.Round((fFromYPlusH - fFromY) / (2 * h), 4) };
+            }
+            else
+            {
+                return new double[] { Math.Round((fFromXPlusH - fFromX) / h, 4), Math.Round((fFromYPlusH - fFromY) / h, 4) };
+            }
+        }
+
+        /// <summary>
+        /// Returns the minimum or maximum approximated point of a function with the fibonacci method
+        /// </summary>
+        /// <param name="function">Function for which the point should be found</param>
+        /// <param name="intervall">Interval in which the point should be</param>
+        /// <param name="n">Number of iterations</param>
+        /// <param name="extremaToFind">Minimum or Maximum</param>
+        /// <returns>A Vector with the x and y value of the founded point</returns>
+        public static Vector ExtremaApproximatedWithFibonacciMethod(Function function, Interval intervall, int n, Enums.EExtrema extremaToFind)
 		{
 			// n can only begin with 2 or higher
 			if (n < 2)

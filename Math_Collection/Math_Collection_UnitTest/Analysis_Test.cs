@@ -5,6 +5,7 @@ using Analysis = Math_Collection.Analysis.AnalysisBase;
 using Math_Collection.LinearAlgebra.Vectors;
 using Math_Collection;
 using RuntimeFunctionParser;
+using Math_Collection.Analysis;
 
 namespace Math_Collection_UnitTest
 {
@@ -19,7 +20,7 @@ namespace Math_Collection_UnitTest
 			double h = 0.001;
 			Parser p = new Parser();
 
-			//Function f(x) = 3
+			//Function f(x) = 3h
 			string function = "3";
 			Function f = p.ParseFunction(function);
 
@@ -34,6 +35,39 @@ namespace Math_Collection_UnitTest
 			actual = Analysis.Derivation_Approximation(f, 1, h);
 			Assert.IsTrue(IsNearlyEqual(expected, actual,h));
 		}
+
+        [TestMethod]
+        public void GradientApproximation_Test()
+        {
+            double h = 0.00001;
+            string function = "(x*y+x^2)+(y*x+y^2)";
+            Function func = new Parser().ParseFunction(function);
+            double[] expected = new double[] { 8, 8};
+            double[] actual = Analysis.PartialDerivatives_Approximation(func, new double[] { 2, 2 }, h, true);
+
+            for(int i = 0; i < actual.Length; i++)
+            {
+                Assert.IsTrue(IsNearlyEqual(expected[i], actual[i], h));    
+            }
+        }
+
+        [TestMethod]
+        public void Gradient_Test()
+        {
+            Function func = new Parser().ParseFunction("x^2+y^2");
+            Gradient grad = new Gradient(func);
+
+            double h = 0.00001;
+
+            Vector expected = new Vector(new double[] { 10, 4});
+            Vector actual = grad.Solve(new double[] { 5, 2 });
+
+            for (int i = 0; i < actual.Size; i++)
+            {
+                Assert.IsTrue(IsNearlyEqual(expected[i], actual[i], h));
+            }
+        }
+
 		[TestMethod]
 		public void ExtremaApproximationWithFibonacciMethod_Test()
 		{
@@ -54,7 +88,6 @@ namespace Math_Collection_UnitTest
             Function f = new Parser().ParseFunction(function);
             Math_Collection.Basics.Interval intervall = new Math_Collection.Basics.Interval(-4, 4);
             Vector pointOfMinimum = Analysis.OptimizeUsingEdgeSearch(f, new Vector(new double[] { 1, 1, 1}), intervall);
-            bool bla = false;
         }
 
         [TestMethod]
