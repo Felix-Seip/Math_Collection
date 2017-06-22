@@ -50,6 +50,8 @@
     <Compile Include="Basics\Basics.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Basics\Interval.cs" />
+    <Compile Include="Analysis\Gradient.cs" />
+    <Compile Include="Exceptions\GradientException.cs" />
     <Compile Include="Linear Algebra\LGS.cs" />
     <Compile Include="Linear Algebra\LinearAlgebraOperations.cs" />
     <Compile Include="Linear Algebra\Matrices\Matrix.cs" />
