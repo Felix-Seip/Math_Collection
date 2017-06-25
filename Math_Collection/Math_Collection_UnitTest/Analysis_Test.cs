@@ -34,7 +34,7 @@ namespace Math_Collection_UnitTest
 			expected = 2.0;
 			actual = Analysis.Derivation_Approximation(f, 1, h);
 			Assert.IsTrue(IsNearlyEqual(expected, actual,h));
-		}
+        }
 
         [TestMethod]
         public void GradientApproximation_Test()
