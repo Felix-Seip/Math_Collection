@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
 using Analysis = Math_Collection.Analysis.AnalysisBase;
 using Math_Collection.LinearAlgebra.Vectors;
 using Math_Collection;
@@ -105,9 +104,23 @@ namespace Math_Collection_UnitTest
 			Assert.IsTrue(IsNearlyEqual(expectedRoot, actualRoot,epsilon));
 		}
 
-		#region Helper methods
+        [TestMethod]
+        public void ApproximatedRootWithGradientMethodWithMinimum_Test()
+        {
+            //Example of a function with a minimum
+            Function func = new Parser().ParseFunction("x^2 + y^2");
+            Gradient grad = new Gradient(func, true);
+            Vector rootPoint = new Vector(new double[] { 5, 5 });
 
-		private bool IsNearlyEqual(double a, double b, double deviation)
+            Vector actual = Analysis.CalculateRootWithConjugateGradientMethod(grad, rootPoint);
+            Vector expected = new Vector(new double[] { 0, 0 });
+
+            Assert.IsTrue(actual.Equals(expected));
+        }
+
+        #region Helper methods
+
+        private bool IsNearlyEqual(double a, double b, double deviation)
 		{
 			return Math.Abs(a - b) <= deviation;
 		}

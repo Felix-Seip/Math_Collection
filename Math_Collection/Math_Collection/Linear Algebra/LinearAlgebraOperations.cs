@@ -443,5 +443,15 @@ namespace Math_Collection.LinearAlgebra
             }
             return inputMatrix;
         }
+
+        public static Matrix TransposeVector(Vector vector)
+        {
+            Matrix matrix = new Matrix(new double[1, vector.Size]);
+            for(int i = 0; i < vector.Size; i++)
+            {
+                matrix[1, i] = vector[i];
+            }
+            return matrix;
+        }
     }
 }

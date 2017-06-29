@@ -9,7 +9,7 @@ namespace Math_Collection.Analysis
     public class Gradient
     {
         public Dictionary<string, Derivative> Functions;
-        private Function func;
+        public Function func;
         private bool PartialDerivative = false;
 
         public Derivative this[string variable]
