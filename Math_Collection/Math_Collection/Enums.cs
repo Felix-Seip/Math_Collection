@@ -103,5 +103,13 @@
 			eSmaller
 		}
 
+		public enum ENumericIntegrationMethod
+		{
+			None,
+			TrapezoidalRule,
+			TangentialTrapezoidalRule,
+			SimpsonRule
+		}
+
     }
 }

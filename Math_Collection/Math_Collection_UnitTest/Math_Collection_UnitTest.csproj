@@ -62,6 +62,7 @@
     <Compile Include="LinearAlgebra_Test.cs" />
     <Compile Include="LGS_Test.cs" />
     <Compile Include="Statistic_Test.cs" />
+    <Compile Include="Integration_Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Math_Collection\Math_Collection.csproj">

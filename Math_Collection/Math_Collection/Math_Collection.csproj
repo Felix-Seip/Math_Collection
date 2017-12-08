@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Analysis\AnalysisBase.cs" />
+    <Compile Include="Analysis\Integration.cs" />
     <Compile Include="Basics\Basics.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Basics\Interval.cs" />
